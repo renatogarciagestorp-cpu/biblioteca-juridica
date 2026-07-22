@@ -15,11 +15,10 @@
   <script type="text/babel">
     function PortalSollicitaStyle() {
       const [searchTerm, setSearchTerm] = React.useState('');
-      const [selectedCategory, setSelectedCategory] = React.useState('todas');
 
       return (
         <div className="min-h-screen flex flex-col">
-          <!-- topo informativo -->
+          {/* TOPO INFORMATIVO */}
           <div className="bg-slate-900 text-slate-300 text-xs py-2 px-6 border-b border-slate-800">
             <div className="max-w-7xl mx-auto flex justify-between items-center">
               <span>Portal de Conteúdo e Pesquisa em Contratações Públicas</span>
@@ -31,7 +30,7 @@
             </div>
           </div>
 
-          <!-- CABEÇALHO PRINCIPAL -->
+          {/* CABEÇALHO PRINCIPAL */}
           <header className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
             <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-3">
@@ -44,7 +43,7 @@
                 </div>
               </div>
 
-              <!-- NAV MENU -->
+              {/* NAV MENU */}
               <nav className="flex items-center gap-6 text-sm font-semibold text-slate-700">
                 <a href="#" className="text-amber-600 border-b-2 border-amber-500 pb-1">Início</a>
                 <a href="#" className="hover:text-amber-600 transition">Jurisprudências</a>
@@ -59,7 +58,7 @@
             </div>
           </header>
 
-          <!-- SEÇÃO HERO DE BUSCA (ESTILO PORTAL SOLLICITA) -->
+          {/* SEÇÃO HERO DE BUSCA */}
           <section className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white py-12 px-6">
             <div className="max-w-4xl mx-auto text-center">
               <span className="bg-amber-500/20 text-amber-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-block mb-3 border border-amber-500/30">
@@ -72,7 +71,7 @@
                 Consulte acórdãos do TCU, pareceres da AGU e teses aplicadas à Nova Lei de Licitações (Lei 14.133/21).
               </p>
 
-              <!-- BARRA DE BUSCA PRINCIPAL -->
+              {/* BARRA DE BUSCA PRINCIPAL */}
               <div className="bg-white p-2 rounded-xl shadow-2xl flex flex-col md:flex-row gap-2">
                 <input 
                   type="text" 
@@ -94,13 +93,13 @@
             </div>
           </section>
 
-          <!-- CONTEÚDO PRINCIPAL (LAYOUT EM DUAS COLUNAS COM FEED) -->
+          {/* CONTEÚDO PRINCIPAL (DUAS COLUNAS) */}
           <main className="max-w-7xl mx-auto px-6 py-10 flex-1 grid grid-cols-1 lg:grid-cols-3 gap-8">
             
-            <!-- COLUNA DA ESQUERDA (2 TERÇOS): ARTIGOS E DESTAQUES -->
+            {/* COLUNA DA ESQUERDA (ARTIGOS E DESTAQUES) */}
             <div className="lg:col-span-2 space-y-8">
               
-              <!-- DESTAQUE PRINCIPAL -->
+              {/* DESTAQUE PRINCIPAL */}
               <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
                 <div className="p-6">
                   <div className="flex items-center gap-2 mb-3">
@@ -122,7 +121,7 @@
                 </div>
               </div>
 
-              <!-- FEED DE ARTIGOS/CONTEÚDOS DA BIBLIOTECA -->
+              {/* FEED DE ATUALIZAÇÕES */}
               <div>
                 <h4 className="text-lg font-bold text-slate-900 mb-4 pb-2 border-b-2 border-slate-900 flex justify-between items-center">
                   <span>Últimas Atualizações</span>
@@ -130,7 +129,7 @@
                 </h4>
 
                 <div className="space-y-4">
-                  <!-- CARD 1 -->
+                  {/* CARD 1 */}
                   <div className="bg-white p-5 rounded-xl border border-slate-200 flex flex-col md:flex-row gap-4 hover:border-slate-300 transition">
                     <div className="flex-1">
                       <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Parecer Orientativo</span>
@@ -138,13 +137,13 @@
                         Reajuste e Reequilíbrio Econômico-Financeiro em Contratos Contínuos
                       </h5>
                       <p className="text-slate-600 text-xs mt-2 line-clamp-2">
-                        Passo a passo para instrução processual dos pedidos de repactuação com dedicação exclusiva de mão de obra.
+                        Passo a passo para instrução processual dos pedidos de repactuação com dedicação exclusiva de mão de obra conforme a Nova Lei.
                       </p>
                       <div className="mt-3 text-xs text-slate-400">AGU • 15 de Julho, 2026</div>
                     </div>
                   </div>
 
-                  <!-- CARD 2 -->
+                  {/* CARD 2 */}
                   <div className="bg-white p-5 rounded-xl border border-slate-200 flex flex-col md:flex-row gap-4 hover:border-slate-300 transition">
                     <div className="flex-1">
                       <span className="text-xs font-bold text-emerald-600 uppercase tracking-wider">Orientação Prática</span>
@@ -157,29 +156,15 @@
                       <div className="mt-3 text-xs text-slate-400">Tribunais de Contas • 10 de Julho, 2026</div>
                     </div>
                   </div>
-
-                  <!-- CARD 3 -->
-                  <div className="bg-white p-5 rounded-xl border border-slate-200 flex flex-col md:flex-row gap-4 hover:border-slate-300 transition">
-                    <div className="flex-1">
-                      <span className="text-xs font-bold text-purple-600 uppercase tracking-wider">MROSC • Lei 13.019/14</span>
-                      <h5 className="font-bold text-slate-900 mt-1 hover:text-amber-600 cursor-pointer">
-                        Prestação de Contas em Parcerias com Organizações da Sociedade Civil
-                      </h5>
-                      <p className="text-slate-600 text-xs mt-2 line-clamp-2">
-                        Como aplicar o relatório de execução do objeto conforme as diretrizes mais recentes.
-                      </p>
-                      <div className="mt-3 text-xs text-slate-400">Terceiro Setor • 02 de Julho, 2026</div>
-                    </div>
-                  </div>
                 </div>
               </div>
 
             </div>
 
-            <!-- COLUNA DA DIREITA (1 TERÇO): SIDEBAR / AVISOS / RADAR -->
+            {/* COLUNA DA DIREITA (SIDEBAR) */}
             <div className="space-y-6">
               
-              <!-- CAIXA DE BUSCA RÁPIDA POR LEI -->
+              {/* LEGISLAÇÃO */}
               <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
                 <h4 className="font-bold text-slate-900 text-sm mb-3 border-l-4 border-amber-500 pl-2">
                   Legislação de Referência
@@ -194,17 +179,13 @@
                     <span className="font-bold">&rarr;</span>
                   </a>
                   <a href="#" className="block p-2.5 rounded bg-slate-50 hover:bg-amber-50 hover:text-amber-800 text-slate-700 transition flex justify-between">
-                    <span>Lei nº 13.303/2016 (Estatais)</span>
-                    <span className="font-bold">&rarr;</span>
-                  </a>
-                  <a href="#" className="block p-2.5 rounded bg-slate-50 hover:bg-amber-50 hover:text-amber-800 text-slate-700 transition flex justify-between">
                     <span>Lei Complementar nº 123/2006 (ME/EPP)</span>
                     <span className="font-bold">&rarr;</span>
                   </a>
                 </div>
               </div>
 
-              <!-- RADAR DE DECISÕES DA SEMANA -->
+              {/* RADAR JURÍDICO */}
               <div className="bg-slate-900 text-white p-5 rounded-xl shadow-sm">
                 <span className="text-amber-400 text-xs font-bold uppercase tracking-wider">Radar Jurídico</span>
                 <h4 className="font-bold text-base mt-1 mb-3">Informativos da Semana</h4>
@@ -216,22 +197,11 @@
                 </button>
               </div>
 
-              <!-- BANNER DE SUPORTE / CONSULTA -->
-              <div className="bg-amber-50 p-5 rounded-xl border border-amber-200 text-amber-900">
-                <h5 className="font-bold text-sm mb-1">Precisa de suporte em um parecer?</h5>
-                <p className="text-xs text-amber-800 mb-3">
-                  Acesse nossa base consolidada de modelos de edital e pareceres referenciais.
-                </p>
-                <a href="#" className="text-xs font-bold text-amber-900 underline hover:text-amber-700">
-                  Acessar Banco de Modelos &rarr;
-                </a>
-              </div>
-
             </div>
 
           </main>
 
-          <!-- RODAPÉ ESTILO PORTAL DE NOTÍCIAS -->
+          {/* RODAPÉ */}
           <footer className="bg-slate-900 text-slate-400 text-xs py-8 px-6 border-t border-slate-800 mt-auto">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
               <div>
