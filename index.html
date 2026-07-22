@@ -3,139 +3,251 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Biblioteca Jurídica - Licitações e Contratações Públicas</title>
+  <title>Biblioteca Jurídica - Licitações e Contratos Públicos</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans">
+<body class="bg-slate-100 text-slate-800 font-sans antialiased">
   <div id="root"></div>
 
   <script type="text/babel">
-    function HomePage() {
+    function PortalSollicitaStyle() {
       const [searchTerm, setSearchTerm] = React.useState('');
-      const [selectedLaw, setSelectedLaw] = React.useState('');
-      const [selectedBody, setSelectedBody] = React.useState('');
+      const [selectedCategory, setSelectedCategory] = React.useState('todas');
 
       return (
-        <div className="min-h-screen">
-          {/* BANNER */}
-          <section className="bg-slate-900 text-white py-12 px-6">
-            <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div>
-                <span className="bg-amber-500 text-slate-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                  Acesso Gratuito Aberto
-                </span>
-                <h1 className="text-4xl font-extrabold mt-4 leading-tight">
-                  Biblioteca Jurídica Especializada em Licitações
-                </h1>
-                <p className="mt-3 text-slate-300 text-lg">
-                  Pesquise jurisprudências, acórdãos e pareceres das Leis 14.133/21, 13.019/14, 13.303/16 e mais.
-                </p>
-              </div>
-              <div className="relative rounded-xl overflow-hidden shadow-2xl bg-slate-800 aspect-video flex items-center justify-center border border-slate-700">
-                <iframe 
-                  className="w-full h-full"
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                  title="Apresentação da Biblioteca Jurídica"
-                  allowFullScreen
-                ></iframe>
+        <div className="min-h-screen flex flex-col">
+          <!-- topo informativo -->
+          <div className="bg-slate-900 text-slate-300 text-xs py-2 px-6 border-b border-slate-800">
+            <div className="max-w-7xl mx-auto flex justify-between items-center">
+              <span>Portal de Conteúdo e Pesquisa em Contratações Públicas</span>
+              <div className="flex gap-4">
+                <a href="#" className="hover:text-amber-400">Jurisprudência TCU</a>
+                <span>•</span>
+                <a href="#" className="hover:text-amber-400">Nova Lei nº 14.133/21</a>
               </div>
             </div>
-          </section>
+          </div>
 
-          {/* BUSCA E FILTROS */}
-          <section className="max-w-6xl mx-auto -mt-8 px-6 relative z-10">
-            <div className="bg-white rounded-xl shadow-lg p-6 border border-slate-200">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="md:col-span-4">
-                  <input 
-                    type="text" 
-                    placeholder="Digite um tema (ex: Termo de Referência, Carona em Ata, Inexigibilidade)..."
-                    className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-900"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                  />
+          <!-- CABEÇALHO PRINCIPAL -->
+          <header className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+            <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="bg-amber-500 text-slate-900 font-black text-2xl px-3 py-1 rounded tracking-tighter">
+                  BJ
                 </div>
-                <select 
-                  className="px-3 py-2 border rounded-lg text-slate-600 bg-white"
-                  value={selectedLaw}
-                  onChange={(e) => setSelectedLaw(e.target.value)}
-                >
-                  <option value="">Todas as Leis</option>
-                  <option value="14133">Lei nº 14.133/2021 (Nova Lei)</option>
-                  <option value="13019">Lei nº 13.019/2014 (MROSC)</option>
-                  <option value="13303">Lei nº 13.303/2016 (Estatais)</option>
-                  <option value="8666">Lei nº 8.666/1993</option>
-                </select>
-                <select 
-                  className="px-3 py-2 border rounded-lg text-slate-600 bg-white"
-                  value={selectedBody}
-                  onChange={(e) => setSelectedBody(e.target.value)}
-                >
-                  <option value="">Todos os Órgãos</option>
-                  <option value="TCU">TCU</option>
-                  <option value="TCE">TCEs Estaduais</option>
-                  <option value="AGU">AGU</option>
-                  <option value="STJ">STJ / STF</option>
-                </select>
+                <div>
+                  <h1 className="text-xl font-bold text-slate-900 leading-none">BIBLIOTECA JURÍDICA</h1>
+                  <p className="text-xs text-slate-500 font-medium tracking-wide">LICITAÇÕES & CONTRATOS</p>
+                </div>
+              </div>
+
+              <!-- NAV MENU -->
+              <nav className="flex items-center gap-6 text-sm font-semibold text-slate-700">
+                <a href="#" className="text-amber-600 border-b-2 border-amber-500 pb-1">Início</a>
+                <a href="#" className="hover:text-amber-600 transition">Jurisprudências</a>
+                <a href="#" className="hover:text-amber-600 transition">Doutrina & Artigos</a>
+                <a href="#" className="hover:text-amber-600 transition">Pareceres</a>
+                <a href="#" className="hover:text-amber-600 transition">Modelos de TR</a>
+              </nav>
+
+              <button className="bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition">
+                Área do Assinante
+              </button>
+            </div>
+          </header>
+
+          <!-- SEÇÃO HERO DE BUSCA (ESTILO PORTAL SOLLICITA) -->
+          <section className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white py-12 px-6">
+            <div className="max-w-4xl mx-auto text-center">
+              <span className="bg-amber-500/20 text-amber-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-block mb-3 border border-amber-500/30">
+                Pesquisa Unificada
+              </span>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
+                O que você precisa fundamentar hoje?
+              </h2>
+              <p className="text-slate-300 text-sm mb-8">
+                Consulte acórdãos do TCU, pareceres da AGU e teses aplicadas à Nova Lei de Licitações (Lei 14.133/21).
+              </p>
+
+              <!-- BARRA DE BUSCA PRINCIPAL -->
+              <div className="bg-white p-2 rounded-xl shadow-2xl flex flex-col md:flex-row gap-2">
                 <input 
-                  type="number" 
-                  placeholder="Ano (ex: 2026)" 
-                  className="px-3 py-2 border rounded-lg text-slate-600"
+                  type="text" 
+                  placeholder="Ex: Pesquisa de preços, Dispensa, Carona em Ata, Termo de Referência..."
+                  className="flex-1 px-4 py-3 text-slate-800 focus:outline-none text-sm"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <button className="bg-amber-500 hover:bg-amber-600 font-bold text-slate-900 rounded-lg py-2 transition">
-                  Pesquisar
+                <select className="px-3 py-3 text-sm text-slate-600 border-l border-slate-200 bg-slate-50 rounded-md focus:outline-none">
+                  <option value="">Todas as fontes</option>
+                  <option value="tcu">Acórdãos TCU</option>
+                  <option value="tce">TCE-RJ e Estaduais</option>
+                  <option value="agu">Pareceres AGU</option>
+                </select>
+                <button className="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-8 py-3 rounded-lg text-sm transition">
+                  Buscar
                 </button>
               </div>
             </div>
           </section>
 
-          {/* CONTEÚDO EXEMPLO */}
-          <section className="max-w-6xl mx-auto my-12 px-6">
-            <h2 className="text-2xl font-bold mb-6 text-slate-900 border-l-4 border-amber-500 pl-3">
-              Assuntos Mais Atuais e Jurisprudências Recentes
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
-                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Lei 14.133/21 • TCU</span>
-                <h3 className="text-lg font-bold mt-2 text-slate-900">
-                  Pesquisa de Preços em Contratações Diretas
-                </h3>
-                <p className="text-slate-600 text-sm mt-2">
-                  Análise dos parâmetros aceitos pelos Tribunais de Contas para balizar processos de dispensa e inexigibilidade...
-                </p>
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Gratuito</span>
-                  <a href="#" className="text-amber-600 font-bold text-sm hover:underline">Ler tese completa &rarr;</a>
+          <!-- CONTEÚDO PRINCIPAL (LAYOUT EM DUAS COLUNAS COM FEED) -->
+          <main className="max-w-7xl mx-auto px-6 py-10 flex-1 grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- COLUNA DA ESQUERDA (2 TERÇOS): ARTIGOS E DESTAQUES -->
+            <div className="lg:col-span-2 space-y-8">
+              
+              <!-- DESTAQUE PRINCIPAL -->
+              <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
+                <div className="p-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-0.5 rounded">JURISPRUDÊNCIA EM FOCO</span>
+                    <span className="text-xs text-slate-400">• Lei 14.133/2021</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-slate-900 hover:text-amber-600 cursor-pointer transition">
+                    TCU fixa novos entendimentos sobre os limites da Pesquisa de Preços em Contratações Diretas
+                  </h3>
+                  <p className="text-slate-600 text-sm mt-3 leading-relaxed">
+                    Análise detalhada do acórdão recente que baliza a utilização de mídias especializadas e tabelas oficiais para instrução de processos de dispensa e inexigibilidade.
+                  </p>
+                  <div className="mt-6 flex items-center justify-between pt-4 border-t border-slate-100">
+                    <span className="text-xs font-medium text-slate-500">Por: Dra. Consultoria Jurídica • Julho/2026</span>
+                    <a href="#" className="text-amber-600 font-bold text-xs hover:underline flex items-center gap-1">
+                      Ler análise completa &rarr;
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
 
-          {/* DEPOIMENTOS */}
-          <section className="bg-slate-100 py-12 border-t border-slate-200">
-            <div class="max-w-6xl mx-auto px-6">
-              <h2 className="text-2xl font-bold text-center mb-8">O que dizem os profissionais de Licitações</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                  <p className="text-slate-600 italic">"Facilitou imensamente a pesquisa de pareceres e acórdãos para os meus termos de referência sob a Lei 14.133."</p>
-                  <div className="mt-4 font-bold text-sm text-slate-800">— Dra. Mariana Silva, Assessora Jurídica</div>
-                </div>
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                  <p className="text-slate-600 italic">"A separação por órgão emissor e a área de comunidade nos ajudam a sanar dúvidas práticas do dia a dia da comissão de contratação."</p>
-                  <div className="mt-4 font-bold text-sm text-slate-800">— Carlos Eduardo, Pregoeiro Público</div>
+              <!-- FEED DE ARTIGOS/CONTEÚDOS DA BIBLIOTECA -->
+              <div>
+                <h4 className="text-lg font-bold text-slate-900 mb-4 pb-2 border-b-2 border-slate-900 flex justify-between items-center">
+                  <span>Últimas Atualizações</span>
+                  <span className="text-xs font-normal text-slate-500">Exibindo conteúdos mais recentes</span>
+                </h4>
+
+                <div className="space-y-4">
+                  <!-- CARD 1 -->
+                  <div className="bg-white p-5 rounded-xl border border-slate-200 flex flex-col md:flex-row gap-4 hover:border-slate-300 transition">
+                    <div className="flex-1">
+                      <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Parecer Orientativo</span>
+                      <h5 className="font-bold text-slate-900 mt-1 hover:text-amber-600 cursor-pointer">
+                        Reajuste e Reequilíbrio Econômico-Financeiro em Contratos Contínuos
+                      </h5>
+                      <p className="text-slate-600 text-xs mt-2 line-clamp-2">
+                        Passo a passo para instrução processual dos pedidos de repactuação com dedicação exclusiva de mão de obra.
+                      </p>
+                      <div className="mt-3 text-xs text-slate-400">AGU • 15 de Julho, 2026</div>
+                    </div>
+                  </div>
+
+                  <!-- CARD 2 -->
+                  <div className="bg-white p-5 rounded-xl border border-slate-200 flex flex-col md:flex-row gap-4 hover:border-slate-300 transition">
+                    <div className="flex-1">
+                      <span className="text-xs font-bold text-emerald-600 uppercase tracking-wider">Orientação Prática</span>
+                      <h5 className="font-bold text-slate-900 mt-1 hover:text-amber-600 cursor-pointer">
+                        Estudo Técnico Preliminar (ETP): Erros mais comuns apontados pelos TCEs
+                      </h5>
+                      <p className="text-slate-600 text-xs mt-2 line-clamp-2">
+                        Checklist dos elementos essenciais e como evitar o fracionamento indevido de despesa no planejamento.
+                      </p>
+                      <div className="mt-3 text-xs text-slate-400">Tribunais de Contas • 10 de Julho, 2026</div>
+                    </div>
+                  </div>
+
+                  <!-- CARD 3 -->
+                  <div className="bg-white p-5 rounded-xl border border-slate-200 flex flex-col md:flex-row gap-4 hover:border-slate-300 transition">
+                    <div className="flex-1">
+                      <span className="text-xs font-bold text-purple-600 uppercase tracking-wider">MROSC • Lei 13.019/14</span>
+                      <h5 className="font-bold text-slate-900 mt-1 hover:text-amber-600 cursor-pointer">
+                        Prestação de Contas em Parcerias com Organizações da Sociedade Civil
+                      </h5>
+                      <p className="text-slate-600 text-xs mt-2 line-clamp-2">
+                        Como aplicar o relatório de execução do objeto conforme as diretrizes mais recentes.
+                      </p>
+                      <div className="mt-3 text-xs text-slate-400">Terceiro Setor • 02 de Julho, 2026</div>
+                    </div>
+                  </div>
                 </div>
               </div>
+
             </div>
-          </section>
+
+            <!-- COLUNA DA DIREITA (1 TERÇO): SIDEBAR / AVISOS / RADAR -->
+            <div className="space-y-6">
+              
+              <!-- CAIXA DE BUSCA RÁPIDA POR LEI -->
+              <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                <h4 className="font-bold text-slate-900 text-sm mb-3 border-l-4 border-amber-500 pl-2">
+                  Legislação de Referência
+                </h4>
+                <div className="space-y-2 text-xs font-medium">
+                  <a href="#" className="block p-2.5 rounded bg-slate-50 hover:bg-amber-50 hover:text-amber-800 text-slate-700 transition flex justify-between">
+                    <span>Lei nº 14.133/2021 (Nova Lei)</span>
+                    <span className="font-bold">&rarr;</span>
+                  </a>
+                  <a href="#" className="block p-2.5 rounded bg-slate-50 hover:bg-amber-50 hover:text-amber-800 text-slate-700 transition flex justify-between">
+                    <span>Lei nº 13.019/2014 (MROSC)</span>
+                    <span className="font-bold">&rarr;</span>
+                  </a>
+                  <a href="#" className="block p-2.5 rounded bg-slate-50 hover:bg-amber-50 hover:text-amber-800 text-slate-700 transition flex justify-between">
+                    <span>Lei nº 13.303/2016 (Estatais)</span>
+                    <span className="font-bold">&rarr;</span>
+                  </a>
+                  <a href="#" className="block p-2.5 rounded bg-slate-50 hover:bg-amber-50 hover:text-amber-800 text-slate-700 transition flex justify-between">
+                    <span>Lei Complementar nº 123/2006 (ME/EPP)</span>
+                    <span className="font-bold">&rarr;</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- RADAR DE DECISÕES DA SEMANA -->
+              <div className="bg-slate-900 text-white p-5 rounded-xl shadow-sm">
+                <span className="text-amber-400 text-xs font-bold uppercase tracking-wider">Radar Jurídico</span>
+                <h4 className="font-bold text-base mt-1 mb-3">Informativos da Semana</h4>
+                <p className="text-xs text-slate-300 leading-relaxed mb-4">
+                  Acompanhe os resumos dos informativos do TCU e dos Tribunais Estaduais para a sua comissão de contratação.
+                </p>
+                <button className="w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold text-xs py-2.5 rounded transition">
+                  Inscrever-se para receber novidades
+                </button>
+              </div>
+
+              <!-- BANNER DE SUPORTE / CONSULTA -->
+              <div className="bg-amber-50 p-5 rounded-xl border border-amber-200 text-amber-900">
+                <h5 className="font-bold text-sm mb-1">Precisa de suporte em um parecer?</h5>
+                <p className="text-xs text-amber-800 mb-3">
+                  Acesse nossa base consolidada de modelos de edital e pareceres referenciais.
+                </p>
+                <a href="#" className="text-xs font-bold text-amber-900 underline hover:text-amber-700">
+                  Acessar Banco de Modelos &rarr;
+                </a>
+              </div>
+
+            </div>
+
+          </main>
+
+          <!-- RODAPÉ ESTILO PORTAL DE NOTÍCIAS -->
+          <footer className="bg-slate-900 text-slate-400 text-xs py-8 px-6 border-t border-slate-800 mt-auto">
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+              <div>
+                <p className="font-bold text-slate-200">Biblioteca Jurídica Especializada</p>
+                <p className="mt-1">Conteúdo direcionado para Gestores, Pregoeiros e Assessores Jurídicos.</p>
+              </div>
+              <p>&copy; 2026 Biblioteca Jurídica. Todos os direitos reservados.</p>
+            </div>
+          </footer>
+
         </div>
       );
     }
 
     const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<HomePage />);
+    root.render(<PortalSollicitaStyle />);
   </script>
 </body>
 </html>
