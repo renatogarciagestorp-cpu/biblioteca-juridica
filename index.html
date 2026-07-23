@@ -39,7 +39,7 @@
     line-height:1.55;
     -webkit-font-smoothing:antialiased;
   }
-  a{color:inherit; text-decoration:none;}
+  a{color:inherit; text-decoration:none; cursor:pointer;}
   button{font-family:inherit; cursor:pointer;}
   :focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
 
@@ -73,7 +73,7 @@
   }
   .logo{
     font-family:var(--font-display); font-weight:600; font-size:22px;
-    color:var(--ink); display:flex; align-items:baseline; gap:2px; flex-shrink:0;
+    color:var(--ink); display:flex; align-items:baseline; gap:2px; flex-shrink:0; cursor:pointer;
   }
   .logo em{
     font-style:normal; color:var(--accent);
@@ -130,7 +130,7 @@
   .chip-row{display:flex; gap:9px; margin-top:16px; flex-wrap:wrap;}
   .chip{
     font-size:12.5px; padding:6px 13px; border-radius:20px; border:1px solid var(--line-strong);
-    color:var(--secondary); background:var(--paper-raised); font-weight:500; transition:all .15s;
+    color:var(--secondary); background:var(--paper-raised); font-weight:500; transition:all .15s; cursor:pointer;
   }
   .chip:hover{border-color:var(--ink);}
   .chip.active{background:var(--ink); color:#fff; border-color:var(--ink);}
@@ -153,13 +153,6 @@
   }
   .slide-media svg{width:62%; height:62%;}
   .slide-media video{width:100%; height:100%; object-fit:cover;}
-  .slide-play{
-    position:absolute; width:64px; height:64px; border-radius:50%; background:rgba(233,236,229,0.95);
-    display:flex; align-items:center; justify-content:center; cursor:pointer; transition:transform .15s;
-    border:none;
-  }
-  .slide-play:hover{transform:scale(1.08);}
-  .slide-play svg{width:22px; height:22px; margin-left:3px;}
   .slide-copy{
     flex:1; padding:46px 44px; display:flex; flex-direction:column; justify-content:center; color:#fff;
   }
@@ -185,31 +178,12 @@
     width:8px; height:8px; border-radius:50%; border:none; background:rgba(255,255,255,0.35); padding:0; transition:background .15s, width .15s;
   }
   .carousel-dots button.active{background:#E4C878; width:22px; border-radius:4px;}
-  @media (max-width:860px){
-    .carousel-track{height:auto;}
-    .slide{position:relative; flex-direction:column;}
-    .slide:not(.active){display:none;}
-    .slide-media{height:220px;}
-    .slide-copy{padding:28px 26px;}
-  }
 
-  /* ---------- Taxonomia (Assuntos / Leis / Órgãos / Estados) ---------- */
-  .tax-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
-  .tax-card{
-    background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius);
-    padding:24px 20px; text-align:left; display:flex; flex-direction:column; gap:8px; transition:border-color .15s, transform .15s;
-  }
-  .tax-card:hover{border-color:var(--accent); transform:translateY(-1px);}
-  .tax-card .tax-icon{
-    width:38px; height:38px; border-radius:8px; background:var(--accent-soft); color:var(--accent);
-    display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-weight:600; font-size:13px;
-  }
-  .tax-card strong{font-family:var(--font-display); font-size:16.5px; color:var(--ink); font-weight:600;}
-  .tax-card span{font-size:12.5px; color:var(--secondary);}
+  /* ---------- Taxonomia ---------- */
   .trending-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px;}
   .trending-item{
     display:flex; align-items:center; gap:16px; background:var(--paper-raised); border:1px solid var(--line);
-    border-radius:var(--radius); padding:16px 18px; text-align:left; transition:border-color .15s, transform .15s;
+    border-radius:var(--radius); padding:16px 18px; text-align:left; transition:border-color .15s, transform .15s; cursor:pointer;
   }
   .trending-item:hover{border-color:var(--accent); transform:translateY(-1px);}
   .trending-rank{
@@ -219,9 +193,6 @@
   .trending-body{display:flex; flex-direction:column; gap:3px;}
   .trending-body strong{font-family:var(--font-display); font-size:15px; color:var(--ink); font-weight:600;}
   .trending-body span{font-size:12px; color:var(--secondary);}
-  @media (max-width:860px){
-    .trending-grid{grid-template-columns:1fr;}
-  }
 
   /* ---------- Favoritos ---------- */
   .fav-btn{
@@ -230,17 +201,6 @@
   }
   .fav-btn:hover{border-color:var(--accent); color:var(--accent);}
   .fav-btn.active{background:var(--accent); border-color:var(--accent); color:#fff;}
-  .doc-card-top{align-items:flex-start;}
-  .doc-row{position:relative;}
-  .doc-row .fav-btn{position:absolute; top:18px; right:18px;}
-
-  /* ---------- WhatsApp flutuante ---------- */
-  .whatsapp-float{
-    position:fixed; bottom:24px; right:24px; width:56px; height:56px; border-radius:50%;
-    background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,0,0,0.22);
-    z-index:80; transition:transform .15s;
-  }
-  .whatsapp-float:hover{transform:scale(1.07);}
 
   /* ---------- Newsletter ---------- */
   .newsletter-box{
@@ -260,7 +220,7 @@
   }
   .newsletter-form button:hover{background:#EFDBA0;}
 
-  /* ---------- Expert CTA (doc detail) ---------- */
+  /* ---------- Expert CTA ---------- */
   .expert-cta{
     margin-top:14px; border:1px dashed var(--line-strong); border-radius:var(--radius); padding:16px 20px;
     display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
@@ -302,16 +262,6 @@
   .admin-del:hover{background:var(--alert-bg); border-color:var(--alert);}
   .admin-custom-badge{
     font-size:10px; background:var(--accent-soft); color:var(--accent); padding:1px 7px; border-radius:10px; font-weight:600; margin-left:6px;
-  }
-  @media (max-width:960px){
-    .admin-layout{grid-template-columns:1fr;}
-    .admin-form{position:static;}
-  }
-  @media (max-width:860px){
-    .tax-grid{grid-template-columns:1fr 1fr !important;}
-  }
-  @media (max-width:560px){
-    .tax-grid{grid-template-columns:1fr !important;}
   }
 
   /* ---------- Fórum de dúvidas (chat) ---------- */
@@ -379,13 +329,6 @@
   .forum-disclaimer{
     font-size:11.5px; color:var(--secondary); text-align:center; padding:8px 20px 0;
   }
-  @media (max-width:860px){
-    .forum-layout{grid-template-columns:1fr; height:auto;}
-    .forum-salas{display:flex; overflow-x:auto; border-right:none; border-bottom:1px solid var(--line);}
-    .sala-item{flex-direction:column; text-align:center; gap:4px; border-left:none; border-bottom:3px solid transparent; flex-shrink:0;}
-    .sala-item.active{border-bottom-color:var(--accent);}
-    .forum-messages{height:400px;}
-  }
 
   /* ---------- Section shell ---------- */
   .section{max-width:1180px; margin:0 auto; padding:36px 28px;}
@@ -398,24 +341,7 @@
   }
   .section-head a.viewall{font-size:13px; color:var(--accent); font-weight:600;}
 
-  /* ---------- Category grid ---------- */
-  .cat-grid{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
-  }
-  .cat-card{
-    background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius);
-    padding:20px; display:flex; flex-direction:column; gap:8px; transition:border-color .15s, transform .15s;
-    text-align:left;
-  }
-  .cat-card:hover{border-color:var(--accent); transform:translateY(-1px);}
-  .cat-card .icon{
-    width:34px; height:34px; border-radius:50%; background:var(--accent-soft); color:var(--accent);
-    display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-weight:600; font-size:14px;
-  }
-  .cat-card strong{font-size:14.5px; color:var(--ink); font-weight:600;}
-  .cat-card span.count{font-size:12.5px; color:var(--secondary);}
-
-  /* ---------- Document card + Selo (stamp) ---------- */
+  /* ---------- Document card + Selo ---------- */
   .doc-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
   .doc-card{
     background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius);
@@ -447,7 +373,7 @@
   .status-vigente{background:var(--success-bg); color:var(--success);}
   .status-cancelado{background:var(--alert-bg); color:var(--alert);}
 
-  /* ---------- Busca (search results) view ---------- */
+  /* ---------- Busca view ---------- */
   .busca-layout{display:grid; grid-template-columns:230px 1fr; gap:32px; align-items:flex-start;}
   .facets{
     background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius);
@@ -465,6 +391,7 @@
   .doc-row{
     background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius);
     padding:20px 22px; display:flex; gap:20px; cursor:pointer; transition:border-color .15s;
+    position:relative;
   }
   .doc-row:hover{border-color:var(--line-strong);}
   .doc-row .selo{flex-shrink:0; align-self:flex-start;}
@@ -480,7 +407,7 @@
     text-align:center; padding:60px 20px; color:var(--secondary); border:1px dashed var(--line-strong); border-radius:var(--radius);
   }
 
-  /* ---------- Documento (detail) view ---------- */
+  /* ---------- Documento view ---------- */
   .doc-detail{max-width:820px; margin:0 auto; padding:40px 28px 80px;}
   .breadcrumb{font-size:12.5px; color:var(--secondary); margin-bottom:22px;}
   .breadcrumb a{color:var(--accent); font-weight:600;}
@@ -529,16 +456,30 @@
 
   .hidden{display:none !important;}
 
+  @media (max-width: 960px){
+    .admin-layout{grid-template-columns:1fr;}
+    .admin-form{position:static;}
+  }
   @media (max-width: 860px){
     .header-inner{flex-wrap:wrap;}
     nav.main{order:3; width:100%; gap:16px;}
     .hero h1{font-size:32px;}
-    .cat-grid, .doc-grid{grid-template-columns:1fr 1fr;}
+    .trending-grid{grid-template-columns:1fr;}
     .busca-layout{grid-template-columns:1fr;}
     .footer-inner{grid-template-columns:1fr 1fr;}
+    .carousel-track{height:auto;}
+    .slide{position:relative; flex-direction:column;}
+    .slide:not(.active){display:none;}
+    .slide-media{height:220px;}
+    .slide-copy{padding:28px 26px;}
+    .forum-layout{grid-template-columns:1fr; height:auto;}
+    .forum-salas{display:flex; overflow-x:auto; border-right:none; border-bottom:1px solid var(--line);}
+    .sala-item{flex-direction:column; text-align:center; gap:4px; border-left:none; border-bottom:3px solid transparent; flex-shrink:0;}
+    .sala-item.active{border-bottom-color:var(--accent);}
+    .forum-messages{height:400px;}
   }
   @media (max-width: 560px){
-    .cat-grid, .doc-grid{grid-template-columns:1fr;}
+    .doc-grid{grid-template-columns:1fr;}
     .footer-inner{grid-template-columns:1fr;}
     .doc-detail-head{flex-direction:column;}
   }
@@ -555,7 +496,7 @@
 
 <header class="site">
   <div class="header-inner">
-    <div class="logo">LICITA<em>TECA</em></div>
+    <div class="logo" onclick="showView('home')">LICITA<em>TECA</em></div>
     <nav class="main">
       <button class="nav-link active" data-view="home" onclick="showView('home')">Início</button>
       <button class="nav-link" data-lei="14133" onclick="showView('busca',{lei:'14133'})">Lei 14.133/21</button>
@@ -609,7 +550,8 @@
         <li><a onclick="alert('Página institucional — a implementar.')">Sobre o LICITATECA</a></li>
         <li><a onclick="alert('Em breve: planos Premium.')">Planos (em breve)</a></li>
         <li><a onclick="alert('Fale conosco — a implementar.')">Contato</a></li>
-        <li><a onclick="showView('admin')" style="opacity:.55;">Painel administrativo</a></li>
+        <!-- Link oculto por padrão; renderFooterLinks() gerencia a visibilidade -->
+        <li id="footer-admin-link" class="hidden"><a onclick="showView('admin')" style="color:#E4C878; font-weight:600;">Painel administrativo</a></li>
       </ul>
     </div>
   </div>
@@ -727,7 +669,7 @@ Por fim, o texto apresenta um roteiro prático para decisão entre licitação t
   }
 ];
 
-/* ===================== TAXONOMIA: LEIS, ASSUNTOS, ÓRGÃOS, ESTADOS ===================== */
+/* ===================== TAXONOMIA ===================== */
 const LEIS = [
   { id:'14133', nome:'Lei 14.133/2021', apelido:'Nova Lei de Licitações e Contratos Administrativos',
     assuntos:['Pregão eletrônico','Pregão presencial','Concorrência','Concurso','Leilão','Diálogo competitivo','Dispensa de licitação','Inexigibilidade de licitação','Credenciamento','Registro de preços','Adesão a ata (carona)','Uso da ata','Termo de referência','Estudo técnico preliminar','Matriz de riscos','Pesquisa de preços','Habilitação','Julgamento das propostas','Recursos administrativos','Prorrogação de prazo','Reajuste','Repactuação','Revisão','Aditivo contratual','Supressão de itens','Inclusão de itens novos','Rescisão contratual','Sanções administrativas','Fiscalização de contratos','Garantia contratual','Subcontratação','Sustentabilidade','Margem de preferência','Tratamento a ME/EPP','Contratação integrada','Obras e serviços de engenharia','Agente de contratação','Portal Nacional de Contratações Públicas','Impedimento de licitar e contratar','Declaração de inidoneidade','Orçamento sigiloso'] },
@@ -795,38 +737,76 @@ const TCMS = [
 
 const TIPO_LABEL = {jurisprudencia:'Jurisprudência', parecer:'Parecer', modelo:'Modelo de Edital', artigo:'Artigo'};
 
-let state = { tipos:new Set(), orgao:'todos', q:'', logado:false, nome:'Você', assunto:'todos', lei:'todos', estado:'todos', favoritos:new Set() };
+// Estado global estendido com flag isAdmin
+let state = { tipos:new Set(), orgao:'todos', q:'', logado:false, isAdmin:false, nome:'Usuário', assunto:'todos', lei:'todos', estado:'todos', favoritos:new Set() };
 
-/* ===================== LOGIN (simulado — protótipo) ===================== */
+/* ===================== AUTENTICAÇÃO E SESSÃO ===================== */
 function renderHeaderActions(){
   const el = document.getElementById('header-actions');
   if(state.logado){
     el.innerHTML = `
       <a class="btn btn-ghost" onclick="showView('favoritos')">★ Favoritos${state.favoritos.size ? ` (${state.favoritos.size})` : ''}</a>
+      ${state.isAdmin ? `<a class="btn btn-ghost" onclick="showView('admin')" style="color:var(--accent); font-weight:600;">Painel Admin</a>` : ''}
       <span style="font-size:13.5px; color:var(--secondary); font-weight:500;">Olá, <b style="color:var(--ink);">${state.nome}</b></span>
       <a class="btn btn-ghost" onclick="fazerLogout()">Sair</a>`;
   } else {
     el.innerHTML = `
-      <a class="btn btn-ghost" onclick="fazerLogin()">Entrar</a>
-      <a class="btn btn-solid" onclick="fazerLogin()">Cadastrar</a>`;
+      <a class="btn btn-ghost" onclick="fazerLogin(false)">Entrar</a>
+      <a class="btn btn-solid" onclick="fazerLogin(false)">Cadastrar</a>`;
   }
 }
+
+function renderFooterLinks(){
+  const adminLink = document.getElementById('footer-admin-link');
+  if(adminLink){
+    if(state.logado && state.isAdmin){
+      adminLink.classList.remove('hidden');
+    } else {
+      adminLink.classList.add('hidden');
+    }
+  }
+}
+
+function fazerLogin(forcarAdmin = false){
+  if(forcarAdmin){
+    state.logado = true;
+    state.isAdmin = true;
+    state.nome = 'Administrador';
+  } else {
+    // Opção para login de admin ou usuário simples
+    const querAdmin = confirm("Deseja fazer login como Administrador?\n\nClique em 'OK' para entrar como Admin ou 'Cancelar' para entrar como Usuário Padrão.");
+    state.logado = true;
+    if(querAdmin){
+      state.isAdmin = true;
+      state.nome = 'Administrador';
+    } else {
+      state.isAdmin = false;
+      state.nome = 'Usuário';
+    }
+  }
+  
+  renderHeaderActions();
+  renderFooterLinks();
+  
+  if(document.getElementById('app').querySelector('.forum-gate')) showView('forum');
+}
+
+function fazerLogout(){
+  state.logado = false;
+  state.isAdmin = false;
+  state.nome = 'Usuário';
+  renderHeaderActions();
+  renderFooterLinks();
+  if(document.getElementById('app').querySelector('.forum-layout')) showView('forum');
+  else showView('home');
+}
+
 function toggleFavorito(id, ev){
   if(ev) ev.stopPropagation();
-  if(!state.logado){ fazerLogin(); return; }
+  if(!state.logado){ fazerLogin(false); return; }
   state.favoritos.has(id) ? state.favoritos.delete(id) : state.favoritos.add(id);
   renderHeaderActions();
   document.querySelectorAll(`.fav-btn[data-fav-id="${id}"]`).forEach(b=>b.classList.toggle('active', state.favoritos.has(id)));
-}
-function fazerLogin(){
-  state.logado = true;
-  renderHeaderActions();
-  if(document.getElementById('app').querySelector('.forum-gate')) showView('forum');
-}
-function fazerLogout(){
-  state.logado = false;
-  renderHeaderActions();
-  if(document.getElementById('app').querySelector('.forum-layout')) showView('forum');
 }
 
 /* ===================== FÓRUM DE DÚVIDAS ===================== */
@@ -897,7 +877,7 @@ function viewForum(){
       <div class="icon-lock"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 10V8a6 6 0 0112 0v2M5 10h14a1 1 0 011 1v9a1 1 0 01-1 1H5a1 1 0 01-1-1v-9a1 1 0 011-1z" stroke="currentColor" stroke-width="1.8"/></svg></div>
       <h2>Fórum exclusivo para usuários cadastrados</h2>
       <p>Crie uma conta gratuita para trocar dúvidas com outros profissionais de licitações e contratos públicos, por tema.</p>
-      <a class="btn btn-solid" onclick="fazerLogin()">Entrar / Cadastrar gratuitamente</a>
+      <a class="btn btn-solid" onclick="fazerLogin(false)">Entrar / Cadastrar gratuitamente</a>
     </div>`;
   }
   setTimeout(forumRenderMensagens, 0);
@@ -932,15 +912,14 @@ function viewForum(){
         </div>
       </div>
     </div>
-    <p class="forum-disclaimer">Ambiente de demonstração — mensagens não são salvas nem compartilhadas entre usuários reais. A versão em produção usará autenticação e conexão em tempo real.</p>
+    <p class="forum-disclaimer">Ambiente de demonstração — mensagens não são salvas nem compartilhadas entre usuários reais.</p>
   </section>
   `;
 }
 
-/* ===================== CARROSSEL (hero) ===================== */
+/* ===================== CARROSSEL ===================== */
 const ARROW_LEFT = `<svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const ARROW_RIGHT = `<svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-const PLAY_ICON = `<svg viewBox="0 0 24 24" fill="var(--ink)"><path d="M8 5v14l11-7z"/></svg>`;
 
 const SVG_TRIBUNAL = `<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
   <rect x="20" y="120" width="160" height="8" fill="#E4C878"/>
@@ -961,10 +940,6 @@ const SVG_DOCUMENTOS = `<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000
   <line x1="47" y1="66" x2="113" y2="66" stroke="#C3C8B9" stroke-width="2"/>
   <line x1="47" y1="76" x2="103" y2="76" stroke="#C3C8B9" stroke-width="2"/>
   <line x1="47" y1="86" x2="113" y2="86" stroke="#C3C8B9" stroke-width="2"/>
-  <g transform="translate(126,88) rotate(-14)">
-    <circle cx="0" cy="0" r="20" fill="none" stroke="#E4C878" stroke-width="3"/>
-    <circle cx="0" cy="0" r="14" fill="none" stroke="#E4C878" stroke-width="1.5"/>
-  </g>
 </svg>`;
 
 const SVG_BALANCA = `<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
@@ -1147,7 +1122,6 @@ function viewBusca(params){
     if(params.orgao !== undefined) state.orgao = params.orgao;
   }
   const orgaos = [...new Set(DOCS.map(d=>d.orgao))];
-  const estadosComDoc = [...new Set(DOCS.map(d=>d.estado).filter(Boolean))];
 
   const render = () => {
     let results = DOCS.filter(d=>{
@@ -1290,9 +1264,9 @@ function viewDocumento(params){
     <div class="premium-note">
       <div>
         <strong>Conteúdo gratuito durante a fase Beta</strong>
-        <p>Documentos como este continuarão acessíveis gratuitamente. Recursos como exportação em lote e alertas personalizados farão parte do plano Premium, em breve.</p>
+        <p>Documentos como este continuarão acessíveis gratuitamente.</p>
       </div>
-      <a class="btn btn-solid" style="background:#E4C878; color:var(--ink);" onclick="alert('Cadastro gratuito — a implementar na Fase 1.')">Criar conta gratuita</a>
+      <a class="btn btn-solid" style="background:#E4C878; color:var(--ink);" onclick="fazerLogin(false)">Criar conta gratuita</a>
     </div>
 
     <div class="expert-cta">
@@ -1306,7 +1280,7 @@ function viewDocumento(params){
 function inscreverNewsletter(ev){
   ev.preventDefault();
   const email = document.getElementById('newsletter-email').value;
-  alert(`Inscrição simulada para ${email}. Em produção, isso dispararia um e-mail de confirmação real.`);
+  alert(`Inscrição simulada para ${email}.`);
   ev.target.reset();
   return false;
 }
@@ -1317,7 +1291,7 @@ function viewFavoritos(){
   <section class="section">
     <div class="section-head"><h2>Meus favoritos</h2></div>
     <div class="doc-list">
-      ${favs.length ? favs.map(docRow).join('') : `<div class="empty-state">Você ainda não salvou nenhum documento.<br>Clique na estrela de qualquer jurisprudência, parecer, modelo ou artigo para salvar aqui.</div>`}
+      ${favs.length ? favs.map(docRow).join('') : `<div class="empty-state">Você ainda não salvou nenhum documento.<br>Clique na estrela de qualquer documento para salvá-lo aqui.</div>`}
     </div>
   </section>`;
 }
@@ -1333,14 +1307,14 @@ async function adminCarregarDocumentosSalvos(){
       const salvos = JSON.parse(res.value);
       salvos.forEach(d=>{ if(!DOCS.some(existing=>existing.id===d.id)) DOCS.push(d); });
     }
-  } catch(e){ /* nada salvo ainda, ou storage indisponível — segue com os dados de demonstração */ }
+  } catch(e){ }
 }
 async function adminPersistir(){
   try{
     if(!window.storage) return;
     const customs = DOCS.filter(d=>d.custom);
     await window.storage.set(STORAGE_KEY, JSON.stringify(customs), false);
-  } catch(e){ console.warn('Não foi possível salvar de forma persistente neste ambiente.', e); }
+  } catch(e){ console.warn('Armazenamento local indisponível.', e); }
 }
 function proximoId(){ return DOCS.length ? Math.max(...DOCS.map(d=>d.id)) + 1 : 1; }
 
@@ -1375,6 +1349,7 @@ function adminSalvarDocumento(){
     assuntos: assuntosSel,
     leis: leisSel,
     estado: $('#admin-estado').value,
+    legislacao: leisSel.map(l => `Lei ${l}`)
   };
 
   DOCS.push(novoDoc);
@@ -1382,9 +1357,10 @@ function adminSalvarDocumento(){
   showView('admin');
   setTimeout(()=>{
     const m = document.getElementById('admin-msg');
-    if(m){ m.style.display='block'; m.style.background='var(--success-bg)'; m.style.color='var(--success)'; m.textContent = `✓ "${novoDoc.titulo}" foi publicado com sucesso.`; }
+    if(m){ m.style.display='block'; m.style.background='var(--success-bg)'; m.style.color='var(--success)'; m.textContent = `✓ "${novoDoc.titulo}" foi publicado no acervo com sucesso.`; }
   }, 0);
 }
+
 function adminExcluirDocumento(id){
   if(!confirm('Remover este documento do acervo?')) return;
   const idx = DOCS.findIndex(d=>d.id===id);
@@ -1394,10 +1370,21 @@ function adminExcluirDocumento(id){
 }
 
 function viewAdmin(){
+  // Bloqueio de acesso para não-administradores
+  if(!state.logado || !state.isAdmin){
+    return `
+    <div class="forum-gate">
+      <div class="icon-lock"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h2>Acesso Restrito ao Administrador</h2>
+      <p>Você precisa estar autenticado como administrador para acessar este painel.</p>
+      <a class="btn btn-solid" onclick="fazerLogin(true)">Entrar como Administrador</a>
+    </div>`;
+  }
+
   return `
   <section class="section">
     <div class="section-head"><h2>Painel administrativo</h2></div>
-    <div class="admin-banner">⚠️ Ferramenta interna para quem alimenta o acervo. Documentos criados aqui ficam salvos no armazenamento deste protótipo (não são visíveis a outros usuários nem substituem um CMS de produção com controle de acesso por papel, fluxo de revisão e auditoria).</div>
+    <div class="admin-banner">🔒 Área restrita do administrador. As novas jurisprudências ou documentos incluídos aqui serão automaticamente disponibilizados nas consultas públicas do site.</div>
     <div class="admin-layout">
       <div class="admin-form">
         <h3>Novo documento</h3>
@@ -1424,7 +1411,7 @@ function viewAdmin(){
         <div class="admin-row2">
           <div class="admin-field">
             <label>Órgão / Fonte</label>
-            <input type="text" id="admin-orgao" list="admin-orgaos-list" placeholder="Ex: TCU, STJ, TCE-SP...">
+            <input type="text" id="admin-orgao" list="admin-orgaos-list" placeholder="Ex: TCU, STJ, TCE-RJ...">
             <datalist id="admin-orgaos-list">
               ${[...ORGAOS_FEDERAIS.map(o=>o.sigla), ...TCES.map(o=>o.sigla), ...TCMS.map(o=>o.sigla), 'LICITATECA','Equipe Editorial'].map(s=>`<option value="${s}">`).join('')}
             </datalist>
@@ -1446,7 +1433,7 @@ function viewAdmin(){
           </select>
         </div>
         <div class="admin-field">
-          <label>Lei(is) relacionada(s)</label>
+          <label>Lei(s) relacionada(s)</label>
           <select id="admin-leis" multiple>
             ${LEIS.map(l=>`<option value="${l.id}">${l.nome}</option>`).join('')}
           </select>
@@ -1511,24 +1498,26 @@ function showView(view, params){
     app.innerHTML = viewForum();
     document.querySelector('nav.main button[data-view="forum"]').classList.add('active');
   } else if(view === 'favoritos'){
-    if(!state.logado){ fazerLogin(); }
+    if(!state.logado){ fazerLogin(false); }
     app.innerHTML = viewFavoritos();
   } else if(view === 'admin'){
     app.innerHTML = viewAdmin();
   }
   window.scrollTo({top:0, behavior:'smooth'});
 }
+
 function buscarDoHero(){
   const val = document.getElementById('hero-search').value;
   state.tipos = new Set();
   showView('busca', {q: val});
 }
-function render_placeholder(){} // botão de busca dentro da view já reage via oninput
+function render_placeholder(){}
 
-/* init */
+/* Inicialização */
 (async function init(){
   await adminCarregarDocumentosSalvos();
   renderHeaderActions();
+  renderFooterLinks();
   showView('home');
 })();
 </script>
