@@ -1,204 +1,1536 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Biblioteca Jurídica - Licitações e Contratos Públicos</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-slate-100 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LICITATECA — Portal de Licitações e Contratações Públicas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F1F3EE;
+    --paper-raised: #FFFFFF;
+    --ink: #16233D;
+    --ink-soft: #2C3A54;
+    --secondary: #57606F;
+    --accent: #A9813B;
+    --accent-soft: #F4ECDA;
+    --line: #DBDED4;
+    --line-strong: #C3C8B9;
+    --success: #3F6E52;
+    --success-bg: #E7EFE9;
+    --alert: #A23B2E;
+    --alert-bg: #F4E7E4;
+    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-body: 'IBM Plex Sans', -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+    --radius: 3px;
+    --shadow-card: 0 1px 2px rgba(22,35,61,0.06), 0 1px 0 rgba(22,35,61,0.04);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink-soft);
+    font-family:var(--font-body);
+    font-size:15px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer;}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
 
-  <!-- TOPO INFORMATIVO -->
-  <div class="bg-slate-900 text-slate-300 text-xs py-2 px-6 border-b border-slate-800">
-    <div class="max-w-7xl mx-auto flex justify-between items-center">
-      <span>Portal de Conteúdo e Pesquisa em Contratações Públicas</span>
-      <div class="flex gap-4">
-        <a href="#" class="hover:text-amber-400">Jurisprudência TCU</a>
-        <span>•</span>
-        <a href="#" class="hover:text-amber-400">Nova Lei nº 14.133/21</a>
-      </div>
+  /* ---------- Top bar ---------- */
+  .topbar{
+    background:var(--ink);
+    color:#E8EAE2;
+    font-size:12.5px;
+    padding:7px 0;
+  }
+  .topbar-inner{
+    max-width:1180px; margin:0 auto; padding:0 28px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  }
+  .topbar-inner span{opacity:0.88;}
+  .topbar-inner strong{color:#E4C878; font-weight:600;}
+  .topbar-cta{
+    color:#E4C878; font-weight:600; white-space:nowrap;
+    border-bottom:1px solid rgba(228,200,120,0.4);
+  }
+
+  /* ---------- Header ---------- */
+  header.site{
+    background:var(--paper-raised);
+    border-bottom:1px solid var(--line);
+    position:sticky; top:0; z-index:40;
+  }
+  .header-inner{
+    max-width:1180px; margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; gap:32px;
+  }
+  .logo{
+    font-family:var(--font-display); font-weight:600; font-size:22px;
+    color:var(--ink); display:flex; align-items:baseline; gap:2px; flex-shrink:0;
+  }
+  .logo em{
+    font-style:normal; color:var(--accent);
+  }
+  nav.main{
+    display:flex; gap:26px; flex:1; flex-wrap:wrap;
+  }
+  nav.main button{
+    background:none; border:none; padding:6px 0; font-size:14px;
+    color:var(--secondary); font-weight:500; border-bottom:2px solid transparent;
+    transition:color .15s, border-color .15s;
+  }
+  nav.main button:hover{color:var(--ink);}
+  nav.main button.active{color:var(--ink); border-color:var(--accent);}
+  .header-actions{display:flex; align-items:center; gap:14px; flex-shrink:0;}
+  .btn{
+    padding:9px 18px; border-radius:var(--radius); font-size:13.5px; font-weight:600;
+    border:1px solid transparent; transition:all .15s;
+  }
+  .btn-ghost{color:var(--ink); border-color:var(--line-strong); background:transparent;}
+  .btn-ghost:hover{background:var(--paper); border-color:var(--ink);}
+  .btn-solid{background:var(--ink); color:#fff;}
+  .btn-solid:hover{background:var(--ink-soft);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    max-width:1180px; margin:0 auto; padding:64px 28px 44px;
+  }
+  .hero-eyebrow{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--accent); font-weight:600; margin-bottom:14px; display:block;
+  }
+  .hero h1{
+    font-family:var(--font-display); font-size:44px; line-height:1.12; color:var(--ink);
+    max-width:720px; margin:0 0 18px; font-weight:600; letter-spacing:-0.01em;
+  }
+  .hero p.lede{
+    font-size:16.5px; color:var(--secondary); max-width:560px; margin:0 0 34px;
+  }
+  .search-box{
+    background:var(--paper-raised); border:1.5px solid var(--ink); border-radius:var(--radius);
+    padding:6px; display:flex; gap:8px; max-width:660px; box-shadow:var(--shadow-card);
+  }
+  .search-box input{
+    flex:1; border:none; background:transparent; padding:12px 14px; font-size:15px;
+    font-family:var(--font-body); color:var(--ink);
+  }
+  .search-box input:focus{outline:none;}
+  .search-box button{
+    background:var(--ink); color:#fff; border:none; border-radius:2px; padding:0 22px;
+    font-weight:600; font-size:14px; display:flex; align-items:center; gap:8px;
+  }
+  .search-box button:hover{background:var(--ink-soft);}
+  .chip-row{display:flex; gap:9px; margin-top:16px; flex-wrap:wrap;}
+  .chip{
+    font-size:12.5px; padding:6px 13px; border-radius:20px; border:1px solid var(--line-strong);
+    color:var(--secondary); background:var(--paper-raised); font-weight:500; transition:all .15s;
+  }
+  .chip:hover{border-color:var(--ink);}
+  .chip.active{background:var(--ink); color:#fff; border-color:var(--ink);}
+
+  /* ---------- Carrossel (hero) ---------- */
+  .carousel-wrap{max-width:1180px; margin:0 auto; padding:0 28px 56px;}
+  .carousel{
+    position:relative; border-radius:6px; overflow:hidden; border:1px solid var(--line);
+    background:var(--ink); box-shadow:var(--shadow-card);
+  }
+  .carousel-track{position:relative; height:420px;}
+  .slide{
+    position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity .5s ease;
+    display:flex; align-items:stretch;
+  }
+  .slide.active{opacity:1; visibility:visible; z-index:2;}
+  .slide-media{
+    flex:1.1; position:relative; overflow:hidden; background:linear-gradient(135deg,#1B2A4A,#0F1A30);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .slide-media svg{width:62%; height:62%;}
+  .slide-media video{width:100%; height:100%; object-fit:cover;}
+  .slide-play{
+    position:absolute; width:64px; height:64px; border-radius:50%; background:rgba(233,236,229,0.95);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; transition:transform .15s;
+    border:none;
+  }
+  .slide-play:hover{transform:scale(1.08);}
+  .slide-play svg{width:22px; height:22px; margin-left:3px;}
+  .slide-copy{
+    flex:1; padding:46px 44px; display:flex; flex-direction:column; justify-content:center; color:#fff;
+  }
+  .slide-copy .eyebrow{
+    font-family:var(--font-mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase;
+    color:#E4C878; font-weight:600; margin-bottom:14px;
+  }
+  .slide-copy h3{font-family:var(--font-display); font-size:27px; line-height:1.28; margin:0 0 14px; font-weight:600;}
+  .slide-copy p{font-size:14px; color:#C7CCD8; line-height:1.6; margin:0 0 22px; max-width:380px;}
+  .slide-copy .btn{width:fit-content;}
+  .carousel-arrow{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:3; width:38px; height:38px; border-radius:50%;
+    background:rgba(22,35,61,0.55); border:1px solid rgba(255,255,255,0.25); color:#fff;
+    display:flex; align-items:center; justify-content:center; transition:background .15s;
+  }
+  .carousel-arrow:hover{background:rgba(22,35,61,0.85);}
+  .carousel-arrow.prev{left:16px;}
+  .carousel-arrow.next{right:16px;}
+  .carousel-dots{
+    position:absolute; bottom:16px; left:0; right:0; z-index:3; display:flex; justify-content:center; gap:8px;
+  }
+  .carousel-dots button{
+    width:8px; height:8px; border-radius:50%; border:none; background:rgba(255,255,255,0.35); padding:0; transition:background .15s, width .15s;
+  }
+  .carousel-dots button.active{background:#E4C878; width:22px; border-radius:4px;}
+  @media (max-width:860px){
+    .carousel-track{height:auto;}
+    .slide{position:relative; flex-direction:column;}
+    .slide:not(.active){display:none;}
+    .slide-media{height:220px;}
+    .slide-copy{padding:28px 26px;}
+  }
+
+  /* ---------- Taxonomia (Assuntos / Leis / Órgãos / Estados) ---------- */
+  .tax-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  .tax-card{
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius);
+    padding:24px 20px; text-align:left; display:flex; flex-direction:column; gap:8px; transition:border-color .15s, transform .15s;
+  }
+  .tax-card:hover{border-color:var(--accent); transform:translateY(-1px);}
+  .tax-card .tax-icon{
+    width:38px; height:38px; border-radius:8px; background:var(--accent-soft); color:var(--accent);
+    display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-weight:600; font-size:13px;
+  }
+  .tax-card strong{font-family:var(--font-display); font-size:16.5px; color:var(--ink); font-weight:600;}
+  .tax-card span{font-size:12.5px; color:var(--secondary);}
+  .trending-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px;}
+  .trending-item{
+    display:flex; align-items:center; gap:16px; background:var(--paper-raised); border:1px solid var(--line);
+    border-radius:var(--radius); padding:16px 18px; text-align:left; transition:border-color .15s, transform .15s;
+  }
+  .trending-item:hover{border-color:var(--accent); transform:translateY(-1px);}
+  .trending-rank{
+    font-family:var(--font-mono); font-size:15px; font-weight:600; color:var(--accent); flex-shrink:0;
+    width:34px; height:34px; border-radius:50%; background:var(--accent-soft); display:flex; align-items:center; justify-content:center;
+  }
+  .trending-body{display:flex; flex-direction:column; gap:3px;}
+  .trending-body strong{font-family:var(--font-display); font-size:15px; color:var(--ink); font-weight:600;}
+  .trending-body span{font-size:12px; color:var(--secondary);}
+  @media (max-width:860px){
+    .trending-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Favoritos ---------- */
+  .fav-btn{
+    background:none; border:1px solid var(--line-strong); border-radius:50%; width:30px; height:30px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; color:var(--secondary); transition:all .15s;
+  }
+  .fav-btn:hover{border-color:var(--accent); color:var(--accent);}
+  .fav-btn.active{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .doc-card-top{align-items:flex-start;}
+  .doc-row{position:relative;}
+  .doc-row .fav-btn{position:absolute; top:18px; right:18px;}
+
+  /* ---------- WhatsApp flutuante ---------- */
+  .whatsapp-float{
+    position:fixed; bottom:24px; right:24px; width:56px; height:56px; border-radius:50%;
+    background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,0,0,0.22);
+    z-index:80; transition:transform .15s;
+  }
+  .whatsapp-float:hover{transform:scale(1.07);}
+
+  /* ---------- Newsletter ---------- */
+  .newsletter-box{
+    background:var(--ink); border-radius:8px; padding:34px 40px; display:flex; align-items:center; justify-content:space-between;
+    gap:26px; flex-wrap:wrap; color:#fff;
+  }
+  .newsletter-box .nl-copy strong{font-family:var(--font-display); font-size:19px; display:block; margin-bottom:5px;}
+  .newsletter-box .nl-copy span{font-size:13px; color:#C7CCD8;}
+  .newsletter-form{display:flex; gap:8px; flex-wrap:wrap;}
+  .newsletter-form input{
+    padding:11px 16px; border-radius:4px; border:1px solid rgba(255,255,255,0.25); background:rgba(255,255,255,0.08);
+    color:#fff; font-family:var(--font-body); font-size:13.5px; min-width:240px;
+  }
+  .newsletter-form input::placeholder{color:#9AA1B0;}
+  .newsletter-form button{
+    background:#E4C878; color:var(--ink); border:none; border-radius:4px; padding:11px 20px; font-weight:600; font-size:13.5px;
+  }
+  .newsletter-form button:hover{background:#EFDBA0;}
+
+  /* ---------- Expert CTA (doc detail) ---------- */
+  .expert-cta{
+    margin-top:14px; border:1px dashed var(--line-strong); border-radius:var(--radius); padding:16px 20px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+  .expert-cta span{font-size:13px; color:var(--secondary);}
+  .expert-cta a{font-size:13px; color:var(--accent); font-weight:600; white-space:nowrap;}
+
+  /* ---------- Painel administrativo ---------- */
+  .admin-banner{
+    background:var(--accent-soft); border:1px solid var(--accent); border-radius:var(--radius); padding:14px 18px;
+    font-size:13px; color:var(--ink-soft); margin-bottom:24px; display:flex; align-items:center; gap:10px;
+  }
+  .admin-layout{display:grid; grid-template-columns:380px 1fr; gap:24px; align-items:flex-start;}
+  .admin-form{
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius); padding:22px; position:sticky; top:88px;
+  }
+  .admin-form h3{font-family:var(--font-display); font-size:17px; margin:0 0 16px; color:var(--ink); font-weight:600;}
+  .admin-field{margin-bottom:14px;}
+  .admin-field label{display:block; font-size:12px; font-weight:600; color:var(--secondary); margin-bottom:5px;}
+  .admin-field input, .admin-field select, .admin-field textarea{
+    width:100%; padding:9px 11px; border:1px solid var(--line-strong); border-radius:3px; font-family:var(--font-body);
+    font-size:13.5px; color:var(--ink-soft); background:var(--paper-raised);
+  }
+  .admin-field textarea{resize:vertical; font-family:var(--font-body);}
+  .admin-field select[multiple]{height:120px;}
+  .admin-field small{display:block; color:var(--secondary); font-size:11px; margin-top:4px;}
+  .admin-row2{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .admin-table{width:100%; border-collapse:collapse; font-size:13px;}
+  .admin-table th{
+    text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--secondary);
+    padding:8px 10px; border-bottom:1px solid var(--line);
+  }
+  .admin-table td{padding:10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  .admin-table tr:hover td{background:var(--paper);}
+  .admin-del{
+    background:none; border:1px solid var(--line-strong); border-radius:3px; padding:5px 10px; font-size:11.5px;
+    color:var(--alert); white-space:nowrap;
+  }
+  .admin-del:hover{background:var(--alert-bg); border-color:var(--alert);}
+  .admin-custom-badge{
+    font-size:10px; background:var(--accent-soft); color:var(--accent); padding:1px 7px; border-radius:10px; font-weight:600; margin-left:6px;
+  }
+  @media (max-width:960px){
+    .admin-layout{grid-template-columns:1fr;}
+    .admin-form{position:static;}
+  }
+  @media (max-width:860px){
+    .tax-grid{grid-template-columns:1fr 1fr !important;}
+  }
+  @media (max-width:560px){
+    .tax-grid{grid-template-columns:1fr !important;}
+  }
+
+  /* ---------- Fórum de dúvidas (chat) ---------- */
+  .forum-gate{
+    max-width:520px; margin:70px auto; text-align:center; background:var(--paper-raised);
+    border:1px solid var(--line); border-radius:var(--radius); padding:44px 36px;
+  }
+  .forum-gate .icon-lock{
+    width:52px; height:52px; border-radius:50%; background:var(--accent-soft); color:var(--accent);
+    display:flex; align-items:center; justify-content:center; margin:0 auto 18px;
+  }
+  .forum-gate h2{font-family:var(--font-display); font-size:23px; color:var(--ink); margin:0 0 10px;}
+  .forum-gate p{color:var(--secondary); font-size:14px; margin:0 0 26px; line-height:1.6;}
+  .forum-layout{display:grid; grid-template-columns:270px 1fr; gap:0; border:1px solid var(--line); border-radius:6px; overflow:hidden; background:var(--paper-raised); height:640px;}
+  .forum-salas{border-right:1px solid var(--line); overflow-y:auto; background:var(--paper);}
+  .forum-salas-head{padding:18px 18px 12px; font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--secondary); font-weight:600;}
+  .sala-item{
+    display:flex; align-items:center; gap:11px; padding:12px 18px; cursor:pointer; border-left:3px solid transparent;
+    transition:background .15s;
+  }
+  .sala-item:hover{background:var(--paper-raised);}
+  .sala-item.active{background:var(--paper-raised); border-left-color:var(--accent);}
+  .sala-icon{
+    width:34px; height:34px; border-radius:8px; background:var(--accent-soft); color:var(--accent); flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-weight:600; font-size:12.5px;
+  }
+  .sala-item strong{display:block; font-size:13.5px; color:var(--ink); font-weight:600;}
+  .sala-item span{font-size:11.5px; color:var(--secondary);}
+  .sala-badge{
+    margin-left:auto; background:var(--alert); color:#fff; font-size:10.5px; font-weight:700; border-radius:20px;
+    padding:2px 7px; flex-shrink:0;
+  }
+  .forum-chat{display:flex; flex-direction:column; height:100%;}
+  .forum-chat-head{
+    padding:16px 22px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between;
+  }
+  .forum-chat-head h3{font-family:var(--font-display); font-size:17px; margin:0; color:var(--ink); font-weight:600;}
+  .forum-chat-head span{font-size:12px; color:var(--secondary);}
+  .online-dot{width:7px; height:7px; border-radius:50%; background:var(--success); display:inline-block; margin-right:5px;}
+  .forum-messages{flex:1; overflow-y:auto; padding:22px; display:flex; flex-direction:column; gap:16px;}
+  .msg{display:flex; gap:11px; max-width:78%;}
+  .msg.me{align-self:flex-end; flex-direction:row-reverse;}
+  .msg-avatar{
+    width:32px; height:32px; border-radius:50%; background:var(--ink); color:#fff; font-size:12px; font-weight:600;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:var(--font-mono);
+  }
+  .msg.me .msg-avatar{background:var(--accent);}
+  .msg-bubble{background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:10px 14px;}
+  .msg.me .msg-bubble{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .msg-meta{font-size:11.5px; color:var(--secondary); margin-bottom:4px; display:flex; gap:8px; font-weight:600;}
+  .msg.me .msg-meta{color:#C7CCD8;}
+  .msg-text{font-size:14px; line-height:1.5;}
+  .forum-input{
+    display:flex; gap:10px; padding:16px 20px; border-top:1px solid var(--line); background:var(--paper-raised);
+  }
+  .forum-input input{
+    flex:1; border:1px solid var(--line-strong); border-radius:20px; padding:11px 18px; font-size:14px; font-family:var(--font-body);
+  }
+  .forum-input input:focus{outline:none; border-color:var(--ink);}
+  .forum-input button{
+    background:var(--ink); color:#fff; border:none; border-radius:50%; width:42px; height:42px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .forum-input button:hover{background:var(--ink-soft);}
+  .forum-disclaimer{
+    font-size:11.5px; color:var(--secondary); text-align:center; padding:8px 20px 0;
+  }
+  @media (max-width:860px){
+    .forum-layout{grid-template-columns:1fr; height:auto;}
+    .forum-salas{display:flex; overflow-x:auto; border-right:none; border-bottom:1px solid var(--line);}
+    .sala-item{flex-direction:column; text-align:center; gap:4px; border-left:none; border-bottom:3px solid transparent; flex-shrink:0;}
+    .sala-item.active{border-bottom-color:var(--accent);}
+    .forum-messages{height:400px;}
+  }
+
+  /* ---------- Section shell ---------- */
+  .section{max-width:1180px; margin:0 auto; padding:36px 28px;}
+  .section-head{
+    display:flex; align-items:baseline; justify-content:space-between; margin-bottom:22px;
+    border-bottom:1px solid var(--line); padding-bottom:14px;
+  }
+  .section-head h2{
+    font-family:var(--font-display); font-size:23px; color:var(--ink); margin:0; font-weight:600;
+  }
+  .section-head a.viewall{font-size:13px; color:var(--accent); font-weight:600;}
+
+  /* ---------- Category grid ---------- */
+  .cat-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
+  }
+  .cat-card{
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius);
+    padding:20px; display:flex; flex-direction:column; gap:8px; transition:border-color .15s, transform .15s;
+    text-align:left;
+  }
+  .cat-card:hover{border-color:var(--accent); transform:translateY(-1px);}
+  .cat-card .icon{
+    width:34px; height:34px; border-radius:50%; background:var(--accent-soft); color:var(--accent);
+    display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-weight:600; font-size:14px;
+  }
+  .cat-card strong{font-size:14.5px; color:var(--ink); font-weight:600;}
+  .cat-card span.count{font-size:12.5px; color:var(--secondary);}
+
+  /* ---------- Document card + Selo (stamp) ---------- */
+  .doc-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .doc-card{
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius);
+    padding:20px; display:flex; flex-direction:column; gap:12px; cursor:pointer;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .doc-card:hover{border-color:var(--line-strong); box-shadow:var(--shadow-card);}
+  .doc-card-top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
+  .doc-tipo{
+    font-size:11px; text-transform:uppercase; letter-spacing:.06em; font-weight:600; color:var(--secondary);
+  }
+  .selo{
+    font-family:var(--font-mono); font-size:10px; letter-spacing:.03em; color:var(--accent);
+    border:1.5px solid var(--accent); border-radius:3px; padding:4px 8px; transform:rotate(-3deg);
+    box-shadow:0 0 0 2px var(--paper-raised), 0 0 0 3px var(--accent); text-align:center; white-space:nowrap;
+    flex-shrink:0; font-weight:600;
+  }
+  .doc-card h3{
+    font-family:var(--font-display); font-size:17px; line-height:1.32; color:var(--ink); margin:0; font-weight:600;
+  }
+  .doc-ementa{font-size:13.5px; color:var(--secondary); line-height:1.5;}
+  .doc-meta{
+    display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:10px;
+    border-top:1px dashed var(--line); font-size:12px; color:var(--secondary);
+  }
+  .status-tag{
+    font-size:11px; font-weight:600; padding:2px 9px; border-radius:20px;
+  }
+  .status-vigente{background:var(--success-bg); color:var(--success);}
+  .status-cancelado{background:var(--alert-bg); color:var(--alert);}
+
+  /* ---------- Busca (search results) view ---------- */
+  .busca-layout{display:grid; grid-template-columns:230px 1fr; gap:32px; align-items:flex-start;}
+  .facets{
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius);
+    padding:20px; position:sticky; top:88px;
+  }
+  .facet-group{margin-bottom:22px;}
+  .facet-group:last-child{margin-bottom:0;}
+  .facet-group h4{
+    font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--secondary); margin:0 0 12px; font-weight:600;
+  }
+  .facet-option{display:flex; align-items:center; gap:9px; margin-bottom:9px; font-size:13.5px; color:var(--ink-soft);}
+  .facet-option input{accent-color:var(--ink);}
+  .results-count{font-size:13.5px; color:var(--secondary); margin-bottom:18px;}
+  .doc-list{display:flex; flex-direction:column; gap:14px;}
+  .doc-row{
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius);
+    padding:20px 22px; display:flex; gap:20px; cursor:pointer; transition:border-color .15s;
+  }
+  .doc-row:hover{border-color:var(--line-strong);}
+  .doc-row .selo{flex-shrink:0; align-self:flex-start;}
+  .doc-row-body{flex:1;}
+  .doc-row h3{font-family:var(--font-display); font-size:17px; margin:0 0 6px; color:var(--ink); font-weight:600;}
+  .doc-row .doc-ementa{margin-bottom:10px;}
+  .tag-row{display:flex; gap:6px; flex-wrap:wrap;}
+  .tag{
+    font-size:11px; background:var(--paper); border:1px solid var(--line); color:var(--secondary);
+    padding:3px 9px; border-radius:20px;
+  }
+  .empty-state{
+    text-align:center; padding:60px 20px; color:var(--secondary); border:1px dashed var(--line-strong); border-radius:var(--radius);
+  }
+
+  /* ---------- Documento (detail) view ---------- */
+  .doc-detail{max-width:820px; margin:0 auto; padding:40px 28px 80px;}
+  .breadcrumb{font-size:12.5px; color:var(--secondary); margin-bottom:22px;}
+  .breadcrumb a{color:var(--accent); font-weight:600;}
+  .doc-detail-head{
+    border-bottom:1px solid var(--line); padding-bottom:26px; margin-bottom:26px;
+    display:flex; justify-content:space-between; gap:24px; align-items:flex-start;
+  }
+  .doc-detail-head h1{
+    font-family:var(--font-display); font-size:29px; line-height:1.25; color:var(--ink); margin:10px 0 14px; font-weight:600;
+  }
+  .doc-detail-meta{display:flex; gap:18px; flex-wrap:wrap; font-size:13px; color:var(--secondary);}
+  .doc-detail-meta b{color:var(--ink-soft); font-weight:600;}
+  .doc-detail .selo{font-size:11px; padding:8px 14px; flex-shrink:0;}
+  .ementa-block{
+    background:var(--accent-soft); border-left:3px solid var(--accent); padding:18px 22px; border-radius:2px;
+    font-size:14.5px; color:var(--ink-soft); margin-bottom:30px; font-style:italic; line-height:1.6;
+  }
+  .doc-body{font-size:15.5px; color:var(--ink-soft); line-height:1.75;}
+  .doc-body p{margin:0 0 18px;}
+  .side-block{margin-top:36px; padding-top:26px; border-top:1px solid var(--line);}
+  .side-block h4{font-size:13px; text-transform:uppercase; letter-spacing:.05em; color:var(--secondary); margin:0 0 14px; font-weight:600;}
+  .leg-chip{
+    display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:12.5px;
+    background:var(--paper); border:1px solid var(--line-strong); padding:7px 12px; border-radius:2px; margin:0 8px 8px 0; color:var(--ink-soft); font-weight:500;
+  }
+  .premium-note{
+    margin-top:32px; background:var(--ink); color:#E8EAE2; padding:20px 24px; border-radius:var(--radius);
+    display:flex; justify-content:space-between; align-items:center; gap:18px; flex-wrap:wrap;
+  }
+  .premium-note strong{color:#E4C878; display:block; font-size:14px; margin-bottom:3px;}
+  .premium-note p{margin:0; font-size:13px; opacity:.85; max-width:420px;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--ink); color:#B8BEC9; margin-top:60px; padding:50px 0 26px;}
+  .footer-inner{max-width:1180px; margin:0 auto; padding:0 28px; display:grid; grid-template-columns:1.3fr repeat(4,0.85fr); gap:26px;}
+  footer h5{color:#fff; font-size:13px; margin:0 0 14px; font-weight:600; letter-spacing:.02em;}
+  footer .logo{color:#fff; font-size:19px; margin-bottom:12px;}
+  footer p.desc{font-size:13px; line-height:1.6; max-width:280px; opacity:.85;}
+  footer ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px;}
+  footer a{font-size:13px; opacity:.85; transition:opacity .15s;}
+  footer a:hover{opacity:1; color:#E4C878;}
+  .footer-bottom{
+    max-width:1180px; margin:36px auto 0; padding:20px 28px 0; border-top:1px solid rgba(255,255,255,0.12);
+    font-size:12px; opacity:.6;
+  }
+
+  .hidden{display:none !important;}
+
+  @media (max-width: 860px){
+    .header-inner{flex-wrap:wrap;}
+    nav.main{order:3; width:100%; gap:16px;}
+    .hero h1{font-size:32px;}
+    .cat-grid, .doc-grid{grid-template-columns:1fr 1fr;}
+    .busca-layout{grid-template-columns:1fr;}
+    .footer-inner{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width: 560px){
+    .cat-grid, .doc-grid{grid-template-columns:1fr;}
+    .footer-inner{grid-template-columns:1fr;}
+    .doc-detail-head{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>Fase Beta — <strong>100% gratuito</strong> para toda a comunidade jurídica.</span>
+    <a class="topbar-cta" onclick="showView('busca')">Criar conta gratuita →</a>
+  </div>
+</div>
+
+<header class="site">
+  <div class="header-inner">
+    <div class="logo">LICITA<em>TECA</em></div>
+    <nav class="main">
+      <button class="nav-link active" data-view="home" onclick="showView('home')">Início</button>
+      <button class="nav-link" data-lei="14133" onclick="showView('busca',{lei:'14133'})">Lei 14.133/21</button>
+      <button class="nav-link" data-lei="13303" onclick="showView('busca',{lei:'13303'})">Lei 13.303/16</button>
+      <button class="nav-link" data-lei="13019" onclick="showView('busca',{lei:'13019'})">Lei 13.019/14</button>
+      <button class="nav-link" data-view="forum" onclick="showView('forum')">Fórum</button>
+    </nav>
+    <div class="header-actions" id="header-actions"></div>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<a class="whatsapp-float" href="https://wa.me/5541988623426" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.6 6.32A8.86 8.86 0 0012.05 4c-4.9 0-8.9 4-8.9 8.9 0 1.57.41 3.1 1.2 4.44L3 21l3.79-1.32a8.87 8.87 0 004.26 1.08h.01c4.9 0 8.9-4 8.9-8.9 0-2.38-.93-4.61-2.36-6.28zm-5.55 13.7h-.01a7.4 7.4 0 01-3.77-1.03l-.27-.16-2.8.98.94-2.73-.18-.28a7.38 7.38 0 01-1.13-3.94c0-4.08 3.32-7.4 7.4-7.4a7.35 7.35 0 015.24 2.18 7.35 7.35 0 012.16 5.23c0 4.08-3.32 7.4-7.4 7.4l-.01-.25zm4.05-5.54c-.22-.11-1.31-.65-1.52-.72-.2-.07-.35-.11-.5.11-.15.22-.57.72-.7.87-.13.15-.26.16-.48.05-.22-.11-.94-.35-1.79-1.1-.66-.59-1.11-1.32-1.24-1.54-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.39.11-.13.15-.22.22-.37.07-.15.04-.28-.02-.39-.07-.11-.5-1.2-.68-1.65-.18-.43-.36-.37-.5-.38h-.42c-.15 0-.39.05-.59.28-.2.22-.77.75-.77 1.83 0 1.08.79 2.12.9 2.27.11.15 1.55 2.36 3.75 3.31.52.22.93.36 1.25.46.53.17 1 .14 1.38.09.42-.06 1.31-.53 1.49-1.05.18-.51.18-.95.13-1.05-.06-.09-.2-.15-.42-.26z"/></svg>
+</a>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="logo">LICITA<em style="color:#E4C878; font-style:normal;">TECA</em></div>
+      <p class="desc">Biblioteca jurídica especializada em licitações e contratações públicas: jurisprudência, pareceres, modelos de edital e artigos, organizados por tema e por legislação.</p>
+    </div>
+    <div>
+      <h5>Acervo</h5>
+      <ul>
+        <li><a onclick="showView('busca',{tipo:'jurisprudencia'})">Jurisprudência</a></li>
+        <li><a onclick="showView('busca',{tipo:'parecer'})">Pareceres</a></li>
+        <li><a onclick="showView('busca',{tipo:'modelo'})">Modelos de Edital</a></li>
+        <li><a onclick="showView('busca',{tipo:'artigo'})">Artigos</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Legislação</h5>
+      <ul>
+        <li><a onclick="showView('busca',{lei:'14133'})">Lei 14.133/21</a></li>
+        <li><a onclick="showView('busca',{lei:'13303'})">Lei 13.303/16</a></li>
+        <li><a onclick="showView('busca',{lei:'13019'})">Lei 13.019/14</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Comunidade</h5>
+      <ul>
+        <li><a onclick="showView('forum')">Fórum de dúvidas</a></li>
+        <li><a onclick="showView('busca',{})">Ver todo o acervo</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Plataforma</h5>
+      <ul>
+        <li><a onclick="alert('Página institucional — a implementar.')">Sobre o LICITATECA</a></li>
+        <li><a onclick="alert('Em breve: planos Premium.')">Planos (em breve)</a></li>
+        <li><a onclick="alert('Fale conosco — a implementar.')">Contato</a></li>
+        <li><a onclick="showView('admin')" style="opacity:.55;">Painel administrativo</a></li>
+      </ul>
     </div>
   </div>
+  <div class="footer-bottom">
+    © 2026 LICITATECA. Conteúdo produzido para fins informativos; não substitui aconselhamento jurídico. Protótipo de produto — dados de demonstração.
+  </div>
+</footer>
 
-  <!-- CABEÇALHO PRINCIPAL (ESTILO SOLLICITA) -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <div class="bg-amber-500 text-slate-900 font-black text-2xl px-3 py-1 rounded tracking-tighter">
-          BJ
+<script>
+/* ===================== DADOS DE DEMONSTRAÇÃO ===================== */
+const DOCS = [
+  {
+    id:1, tipo:'jurisprudencia', orgao:'TCU', protocolo:'Acórdão 1.842/2026 — Plenário', status:'vigente',
+    data:'12/06/2026', titulo:'Dispensa de licitação por valor não afasta o dever de pesquisa de preços',
+    ementa:'O TCU reafirma que, mesmo nas dispensas de licitação em razão do valor (art. 75, I e II, da Lei 14.133/2021), o gestor permanece obrigado a realizar pesquisa de preços que demonstre a vantajosidade da contratação direta.',
+    categorias:['Dispensa e Inexigibilidade','Lei 14.133/2021'],
+    assuntos:['Dispensa de licitação','Pesquisa de preços'], leis:['14133'], estado:'Federal',
+    legislacao:['Lei 14.133/2021, art. 75','Lei 14.133/2021, art. 23'],
+    corpo:`O Tribunal de Contas da União, ao apreciar representação sobre contratação direta realizada por órgão federal, reiterou entendimento consolidado de que a dispensa de licitação em razão do valor não dispensa o administrador do dever de comprovar a compatibilidade do preço contratado com os praticados no mercado.
+
+Segundo o relator, a pesquisa de preços constitui elemento essencial de instrução processual, sendo insuficiente a mera cotação com um único fornecedor. O acórdão recomenda a adoção de, no mínimo, três fontes de pesquisa, entre painéis de preços oficiais, contratações similares de outros entes públicos e cotações diretas com fornecedores.
+
+A decisão também destaca que a ausência de documentação adequada da pesquisa de preços pode configurar, a depender do caso concreto, dano ao erário e ensejar responsabilização do agente público responsável pela instrução do processo.`
+  },
+  {
+    id:2, tipo:'parecer', orgao:'AGU', protocolo:'Parecer 07/2026 — CGU/AGU', status:'vigente',
+    data:'03/05/2026', titulo:'Possibilidade de repactuação de contratos de serviços contínuos com dedicação de mão de obra',
+    ementa:'Parecer normativo sobre os requisitos para repactuação de contratos continuados diante de aumento de custos trabalhistas, distinguindo repactuação de reajuste e de reequilíbrio econômico-financeiro.',
+    categorias:['Contratos Administrativos','Execução Contratual'],
+    assuntos:['Repactuação','Reajuste'], leis:['14133'], estado:'Federal',
+    legislacao:['Lei 14.133/2021, art. 135','Lei 14.133/2021, art. 136'],
+    corpo:`O parecer analisa a distinção conceitual entre os institutos da repactuação, do reajuste em sentido estrito e do reequilíbrio econômico-financeiro, aplicáveis aos contratos de prestação de serviços contínuos com dedicação exclusiva de mão de obra.
+
+Conclui-se que a repactuação está vinculada à demonstração analítica da variação de custos, notadamente os decorrentes de dissídio, acordo ou convenção coletiva de trabalho, não se confundindo com reajuste por índice, que se baseia em variação de preços de mercado.
+
+O documento orienta os órgãos da Administração a manter controle apartado das planilhas de custos e formação de preços de cada contrato, de modo a viabilizar a análise técnica dos pedidos de repactuação apresentados pelas contratadas.`
+  },
+  {
+    id:3, tipo:'modelo', orgao:'LICITATECA', protocolo:'Modelo Editorial — Ed. 2026.3', status:'vigente',
+    data:'28/06/2026', titulo:'Modelo de edital de pregão eletrônico para contratação de serviços de TI',
+    ementa:'Minuta completa de edital de pregão eletrônico, no formato do Sistema de Registro de Preços, para contratação de serviços continuados de tecnologia da informação, com anexos técnicos e planilha de custos.',
+    categorias:['Pregão Eletrônico','Contratos de TI','Modelos'],
+    assuntos:['Pregão eletrônico'], leis:['14133'], estado:'Federal',
+    legislacao:['Lei 14.133/2021','Decreto 11.462/2023'],
+    corpo:`Este modelo foi estruturado para contratações de serviços de tecnologia da informação com dedicação não exclusiva de mão de obra, contemplando as cláusulas obrigatórias previstas na Lei 14.133/2021 e nos normativos correlatos.
+
+A minuta inclui: preâmbulo, condições de participação, critérios de julgamento por menor preço, exigências de habilitação técnica e econômico-financeira, minuta de contrato, termo de referência padrão e planilha de formação de preços.
+
+Recomenda-se a adaptação dos elementos técnicos (especificações, quantitativos e níveis de serviço) à realidade de cada órgão antes da publicação, mantendo-se inalteradas as cláusulas de natureza jurídica.`
+  },
+  {
+    id:4, tipo:'artigo', orgao:'Equipe Editorial', protocolo:'Artigo — Jul/2026', status:'vigente',
+    data:'15/07/2026', titulo:'O que muda na aplicação de sanções administrativas com a Lei 14.133/2021',
+    ementa:'Panorama prático sobre o novo regime sancionatório, incluindo as espécies de penalidade, o rito do processo administrativo e os efeitos do Cadastro Nacional de Empresas Inidôneas e Suspensas (CEIS).',
+    categorias:['Sanções Administrativas','Lei 14.133/2021'],
+    assuntos:['Sanções administrativas'], leis:['14133'], estado:'Federal',
+    legislacao:['Lei 14.133/2021, art. 155 a 163'],
+    corpo:`A nova Lei de Licitações unificou o regime sancionatório antes disperso entre a Lei 8.666/1993 e a Lei do Pregão, estabelecendo cinco espécies de sanção: advertência, multa, impedimento de licitar e contratar, declaração de inidoneidade e, em situações específicas, o descredenciamento.
+
+O artigo detalha o rito processual, com prazo de defesa de 15 dias úteis, e a exigência de proporcionalidade entre a conduta do particular e a penalidade aplicada, conforme critérios objetivos previstos no art. 156, §1º.
+
+Por fim, discute-se a obrigatoriedade de registro no Cadastro Nacional de Empresas Punidas e os efeitos da sanção para além do órgão sancionador, com validade em todo o território nacional para as penalidades de maior gravidade.`
+  },
+  {
+    id:5, tipo:'jurisprudencia', orgao:'STJ', protocolo:'REsp 2.198.430/SP', status:'vigente',
+    data:'22/04/2026', titulo:'Responsabilidade subsidiária da Administração em contratos de terceirização',
+    ementa:'O STJ reafirma que a responsabilidade subsidiária da Administração Pública por débitos trabalhistas de contratada depende da comprovação de falha na fiscalização do contrato, não sendo automática.',
+    categorias:['Contratos Administrativos','Execução Contratual'],
+    assuntos:['Fiscalização de contratos'], leis:['14133'], estado:'Federal',
+    legislacao:['Lei 14.133/2021, art. 121'],
+    corpo:`No julgamento do recurso especial, a Corte reafirmou entendimento já consolidado no Tema 246 do STF, segundo o qual a responsabilização subsidiária do ente público exige prova de conduta culposa na fiscalização da execução do contrato administrativo.
+
+O relator destacou que a ausência de fiscalização adequada — como a falta de exigência de comprovantes de quitação de obrigações trabalhistas e previdenciárias da contratada — pode caracterizar culpa in vigilando apta a ensejar a responsabilização subsidiária.
+
+A decisão reforça a importância de rotinas formais de fiscalização contratual, com documentação que comprove o acompanhamento mensal das obrigações da contratada perante seus empregados.`
+  },
+  {
+    id:6, tipo:'parecer', orgao:'TCE-SP', protocolo:'Parecer Técnico 112/2026', status:'cancelado',
+    data:'09/02/2026', titulo:'Vedação à exigência de marca em termos de referência (entendimento superado)',
+    ementa:'Parecer técnico posteriormente superado por nova orientação do próprio tribunal, que passou a admitir a indicação de marca como referência de padrão de qualidade, desde que devidamente justificada.',
+    categorias:['Termo de Referência','Pregão Eletrônico'],
+    assuntos:['Termo de referência','Pregão eletrônico'], leis:['14133'], estado:'São Paulo',
+    legislacao:['Lei 14.133/2021, art. 41'],
+    corpo:`Este parecer técnico, embora tenha vigorado por período determinado, foi expressamente superado por orientação mais recente do mesmo tribunal, que passou a admitir a indicação de marca ou modelo em termos de referência como parâmetro de qualidade, desde que acompanhada de justificativa técnica e da expressão "ou equivalente".
+
+O documento é mantido no acervo para fins de pesquisa histórica e para orientar sobre a evolução do entendimento do órgão de controle sobre o tema.
+
+Recomenda-se aos usuários a consulta ao entendimento vigente antes de utilizar este parecer como fundamentação em processos administrativos.`
+  },
+  {
+    id:7, tipo:'modelo', orgao:'LICITATECA', protocolo:'Modelo Editorial — Ed. 2026.2', status:'vigente',
+    data:'30/03/2026', titulo:'Modelo de termo de referência para contratação de obras por empreitada',
+    ementa:'Estrutura completa de termo de referência para contratação de obras de engenharia sob o regime de empreitada por preço global, com cronograma físico-financeiro e critérios de medição.',
+    categorias:['Obras e Engenharia','Modelos'],
+    assuntos:['Obras e serviços de engenharia'], leis:['14133'], estado:'Federal',
+    legislacao:['Lei 14.133/2021, art. 46'],
+    corpo:`O modelo contempla a definição do objeto, memorial descritivo, orçamento estimado com composição analítica de custos unitários, cronograma físico-financeiro e critérios de medição e pagamento por etapa executada.
+
+Inclui ainda cláusulas específicas sobre matriz de riscos, obrigatória para contratações de obras e serviços de engenharia sob a Lei 14.133/2021, com repartição objetiva de responsabilidades entre a Administração e a contratada.
+
+A adaptação do modelo exige acompanhamento de profissional de engenharia habilitado, responsável técnico pela elaboração do orçamento e da matriz de riscos específica da obra.`
+  },
+  {
+    id:8, tipo:'artigo', orgao:'Equipe Editorial', protocolo:'Artigo — Jun/2026', status:'vigente',
+    data:'02/06/2026', titulo:'Sistema de Registro de Preços: quando vale a pena optar por essa modalidade',
+    ementa:'Análise prática sobre os cenários em que o Registro de Preços é mais vantajoso do que a licitação tradicional, com atenção às regras de adesão (carona) e seus limites após a Lei 14.133/2021.',
+    categorias:['Registro de Preços','Lei 14.133/2021'],
+    assuntos:['Registro de preços'], leis:['14133','7892'], estado:'Federal',
+    legislacao:['Lei 14.133/2021, art. 82 a 86'],
+    corpo:`O artigo examina as hipóteses em que o Sistema de Registro de Preços (SRP) se mostra mais eficiente do que a licitação convencional, especialmente em contratações de demanda imprevisível ou parcelada ao longo do exercício.
+
+Discute-se também a limitação trazida pela nova lei às chamadas "caronas" em atas de registro de preços, com quantitativo máximo por órgão não participante e a necessidade de anuência do órgão gerenciador.
+
+Por fim, o texto apresenta um roteiro prático para decisão entre licitação tradicional e SRP, considerando previsibilidade de demanda, sazonalidade e capacidade de gestão de estoque do órgão contratante.`
+  }
+];
+
+/* ===================== TAXONOMIA: LEIS, ASSUNTOS, ÓRGÃOS, ESTADOS ===================== */
+const LEIS = [
+  { id:'14133', nome:'Lei 14.133/2021', apelido:'Nova Lei de Licitações e Contratos Administrativos',
+    assuntos:['Pregão eletrônico','Pregão presencial','Concorrência','Concurso','Leilão','Diálogo competitivo','Dispensa de licitação','Inexigibilidade de licitação','Credenciamento','Registro de preços','Adesão a ata (carona)','Uso da ata','Termo de referência','Estudo técnico preliminar','Matriz de riscos','Pesquisa de preços','Habilitação','Julgamento das propostas','Recursos administrativos','Prorrogação de prazo','Reajuste','Repactuação','Revisão','Aditivo contratual','Supressão de itens','Inclusão de itens novos','Rescisão contratual','Sanções administrativas','Fiscalização de contratos','Garantia contratual','Subcontratação','Sustentabilidade','Margem de preferência','Tratamento a ME/EPP','Contratação integrada','Obras e serviços de engenharia','Agente de contratação','Portal Nacional de Contratações Públicas','Impedimento de licitar e contratar','Declaração de inidoneidade','Orçamento sigiloso'] },
+  { id:'8666', nome:'Lei 8.666/1993', apelido:'Lei Geral de Licitações (regime anterior, aplicável a contratos residuais)',
+    assuntos:['Concorrência','Tomada de preços','Convite','Concurso','Leilão','Dispensa de licitação','Inexigibilidade de licitação','Registro cadastral','Habilitação jurídica','Habilitação fiscal','Julgamento por menor preço','Julgamento por técnica e preço','Prorrogação de prazo','Reajuste','Repactuação','Aditivo contratual','Supressão de itens','Rescisão contratual','Sanções administrativas','Convênios administrativos','Garantia contratual'] },
+  { id:'10520', nome:'Lei 10.520/2002', apelido:'Lei do Pregão',
+    assuntos:['Pregão presencial','Pregão eletrônico','Fase de lances','Inversão de fases','Habilitação posterior ao julgamento','Recursos administrativos','Impedimento de licitar e contratar','Registro de preços'] },
+  { id:'7892', nome:'Decreto 7.892/2013', apelido:'Regulamenta o Sistema de Registro de Preços',
+    assuntos:['Registro de preços','Adesão a ata (carona)','Uso da ata','Vigência da ata','Cancelamento do registro de preços','Intenção de registro de preços (IRP)'] },
+  { id:'lc123', nome:'Lei Complementar 123/2006', apelido:'Estatuto Nacional da Microempresa e Empresa de Pequeno Porte',
+    assuntos:['Tratamento a ME/EPP','Empate ficto','Regularização fiscal tardia','Subcontratação','Cota reservada para ME/EPP'] },
+  { id:'13303', nome:'Lei 13.303/2016', apelido:'Lei das Estatais',
+    assuntos:['Licitações em empresas públicas','Licitações em sociedades de economia mista','Regulamento interno de licitações','Contratação direta','Governança corporativa','Programa de integridade'] },
+  { id:'12846', nome:'Lei 12.846/2013', apelido:'Lei Anticorrupção',
+    assuntos:['Responsabilização de pessoas jurídicas','Programa de integridade','Acordo de leniência','Cadastro de empresas punidas','Fraude à licitação'] },
+  { id:'8429', nome:'Lei 8.429/1992', apelido:'Lei de Improbidade Administrativa',
+    assuntos:['Atos de improbidade','Dano ao erário','Enriquecimento ilícito','Sanções administrativas'] },
+  { id:'9784', nome:'Lei 9.784/1999', apelido:'Processo Administrativo Federal',
+    assuntos:['Recursos administrativos','Anulação de atos administrativos','Revogação de atos administrativos','Prorrogação de prazo'] },
+  { id:'13019', nome:'Lei 13.019/2014', apelido:'Marco Regulatório das Organizações da Sociedade Civil (MROSC)',
+    assuntos:['Chamamento público','Termo de colaboração','Termo de fomento','Acordo de cooperação','Plano de trabalho','Prestação de contas','Dispensa de chamamento público','Parcerias com organizações da sociedade civil'] },
+];
+const ASSUNTOS = [...new Set(LEIS.flatMap(l=>l.assuntos))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
+
+const MAIS_LIDOS = [
+  {assunto:'Dispensa de licitação', leituras:4820},
+  {assunto:'Pregão eletrônico', leituras:3960},
+  {assunto:'Repactuação', leituras:3110},
+  {assunto:'Registro de preços', leituras:2870},
+  {assunto:'Sanções administrativas', leituras:2430},
+  {assunto:'Pesquisa de preços', leituras:2205},
+  {assunto:'Termo de referência', leituras:1980},
+  {assunto:'Prorrogação de prazo', leituras:1740},
+];
+
+const ORGAOS_FEDERAIS = [
+  {sigla:'STF', nome:'Supremo Tribunal Federal'},
+  {sigla:'STJ', nome:'Superior Tribunal de Justiça'},
+  {sigla:'TCU', nome:'Tribunal de Contas da União'},
+  {sigla:'AGU', nome:'Advocacia-Geral da União'},
+  {sigla:'CGU', nome:'Controladoria-Geral da União'},
+  {sigla:'Senado', nome:'Senado Federal'},
+  {sigla:'Câmara', nome:'Câmara dos Deputados'},
+];
+const ESTADOS = [
+  {nome:'Acre', sigla:'AC'}, {nome:'Alagoas', sigla:'AL'}, {nome:'Amapá', sigla:'AP'}, {nome:'Amazonas', sigla:'AM'},
+  {nome:'Bahia', sigla:'BA'}, {nome:'Ceará', sigla:'CE'}, {nome:'Distrito Federal', sigla:'DF'}, {nome:'Espírito Santo', sigla:'ES'},
+  {nome:'Goiás', sigla:'GO'}, {nome:'Maranhão', sigla:'MA'}, {nome:'Mato Grosso', sigla:'MT'}, {nome:'Mato Grosso do Sul', sigla:'MS'},
+  {nome:'Minas Gerais', sigla:'MG'}, {nome:'Pará', sigla:'PA'}, {nome:'Paraíba', sigla:'PB'}, {nome:'Paraná', sigla:'PR'},
+  {nome:'Pernambuco', sigla:'PE'}, {nome:'Piauí', sigla:'PI'}, {nome:'Rio de Janeiro', sigla:'RJ'}, {nome:'Rio Grande do Norte', sigla:'RN'},
+  {nome:'Rio Grande do Sul', sigla:'RS'}, {nome:'Rondônia', sigla:'RO'}, {nome:'Roraima', sigla:'RR'}, {nome:'Santa Catarina', sigla:'SC'},
+  {nome:'São Paulo', sigla:'SP'}, {nome:'Sergipe', sigla:'SE'}, {nome:'Tocantins', sigla:'TO'},
+];
+const TCES = ESTADOS.map(e => e.sigla === 'DF'
+  ? {sigla:'TCDF', nome:'Tribunal de Contas do Distrito Federal', estado:e.nome}
+  : {sigla:`TCE-${e.sigla}`, nome:`Tribunal de Contas do Estado ${e.sigla==='AM'||e.sigla==='ES'?'do':'de'} ${e.nome}`, estado:e.nome});
+const TCMS = [
+  {sigla:'TCM-BA', nome:'Tribunal de Contas dos Municípios da Bahia', estado:'Bahia'},
+  {sigla:'TCM-CE', nome:'Tribunal de Contas dos Municípios do Ceará', estado:'Ceará'},
+  {sigla:'TCM-GO', nome:'Tribunal de Contas dos Municípios de Goiás', estado:'Goiás'},
+  {sigla:'TCM-PA', nome:'Tribunal de Contas dos Municípios do Pará', estado:'Pará'},
+  {sigla:'TCM-RJ', nome:'Tribunal de Contas do Município do Rio de Janeiro', estado:'Rio de Janeiro'},
+  {sigla:'TCM-SP', nome:'Tribunal de Contas do Município de São Paulo', estado:'São Paulo'},
+];
+
+const TIPO_LABEL = {jurisprudencia:'Jurisprudência', parecer:'Parecer', modelo:'Modelo de Edital', artigo:'Artigo'};
+
+let state = { tipos:new Set(), orgao:'todos', q:'', logado:false, nome:'Você', assunto:'todos', lei:'todos', estado:'todos', favoritos:new Set() };
+
+/* ===================== LOGIN (simulado — protótipo) ===================== */
+function renderHeaderActions(){
+  const el = document.getElementById('header-actions');
+  if(state.logado){
+    el.innerHTML = `
+      <a class="btn btn-ghost" onclick="showView('favoritos')">★ Favoritos${state.favoritos.size ? ` (${state.favoritos.size})` : ''}</a>
+      <span style="font-size:13.5px; color:var(--secondary); font-weight:500;">Olá, <b style="color:var(--ink);">${state.nome}</b></span>
+      <a class="btn btn-ghost" onclick="fazerLogout()">Sair</a>`;
+  } else {
+    el.innerHTML = `
+      <a class="btn btn-ghost" onclick="fazerLogin()">Entrar</a>
+      <a class="btn btn-solid" onclick="fazerLogin()">Cadastrar</a>`;
+  }
+}
+function toggleFavorito(id, ev){
+  if(ev) ev.stopPropagation();
+  if(!state.logado){ fazerLogin(); return; }
+  state.favoritos.has(id) ? state.favoritos.delete(id) : state.favoritos.add(id);
+  renderHeaderActions();
+  document.querySelectorAll(`.fav-btn[data-fav-id="${id}"]`).forEach(b=>b.classList.toggle('active', state.favoritos.has(id)));
+}
+function fazerLogin(){
+  state.logado = true;
+  renderHeaderActions();
+  if(document.getElementById('app').querySelector('.forum-gate')) showView('forum');
+}
+function fazerLogout(){
+  state.logado = false;
+  renderHeaderActions();
+  if(document.getElementById('app').querySelector('.forum-layout')) showView('forum');
+}
+
+/* ===================== FÓRUM DE DÚVIDAS ===================== */
+let salaAtual = 'pregao';
+const FORUM_SALAS = [
+  { id:'pregao', nome:'Pregão Eletrônico', sigla:'PE', online:14,
+    mensagens:[
+      {autor:'Marcos T.', hora:'09:12', texto:'Alguém já aplicou o novo prazo de impugnação da Lei 14.133 num pregão de serviços contínuos?'},
+      {autor:'Fernanda A.', hora:'09:15', texto:'Já sim. O prazo de impugnação é até 3 dias úteis antes da abertura, diferente do pregão antigo.'},
+      {autor:'Marcos T.', hora:'09:16', texto:'Perfeito, obrigado! Vou revisar o edital com base nisso.'},
+    ]},
+  { id:'dispensa', nome:'Dispensa e Inexigibilidade', sigla:'DI', online:9,
+    mensagens:[
+      {autor:'Carla M.', hora:'08:40', texto:'Vocês costumam usar quantas fontes na pesquisa de preços pra dispensa por valor?'},
+      {autor:'Roberto S.', hora:'08:44', texto:'Aqui usamos no mínimo 3 fontes, seguindo o entendimento recente do TCU sobre o tema.'},
+    ]},
+  { id:'srp', nome:'Registro de Preços', sigla:'RP', online:6,
+    mensagens:[
+      {autor:'Juliana P.', hora:'07:58', texto:'Existe limite de quantos órgãos podem aderir a uma ata como carona?'},
+      {autor:'Anderson V.', hora:'08:02', texto:'Sim, a Lei 14.133 trouxe limites por órgão não participante. Vale revisar o art. 86.'},
+    ]},
+  { id:'sancoes', nome:'Sanções Administrativas', sigla:'SA', online:4,
+    mensagens:[
+      {autor:'Patrícia L.', hora:'10:20', texto:'Alguém tem modelo de decisão para aplicação de multa por atraso na entrega?'},
+    ]},
+  { id:'geral', nome:'Dúvidas Gerais', sigla:'DG', online:21,
+    mensagens:[
+      {autor:'Equipe LICITATECA', hora:'08:00', texto:'Bem-vindos ao fórum! Usem as salas por tema para manter as discussões organizadas. 👋'},
+      {autor:'Igor N.', hora:'08:30', texto:'Ótima iniciativa! Já ajudou muito na dúvida que eu tinha sobre repactuação.'},
+    ]},
+];
+
+function forumIniciais(nome){
+  return nome.split(' ').map(p=>p[0]).slice(0,2).join('').toUpperCase();
+}
+function forumRenderMensagens(){
+  const sala = FORUM_SALAS.find(s=>s.id===salaAtual);
+  const box = document.getElementById('forum-messages');
+  if(!box) return;
+  box.innerHTML = sala.mensagens.map(m=>`
+    <div class="msg ${m.autor===state.nome?'me':''}">
+      <div class="msg-avatar">${forumIniciais(m.autor)}</div>
+      <div class="msg-bubble">
+        <div class="msg-meta"><span>${m.autor}</span><span>${m.hora}</span></div>
+        <div class="msg-text">${m.texto}</div>
+      </div>
+    </div>`).join('');
+  box.scrollTop = box.scrollHeight;
+}
+function forumTrocarSala(id){
+  salaAtual = id;
+  showView('forum');
+}
+function forumEnviar(){
+  const input = document.getElementById('forum-input-field');
+  const texto = input.value.trim();
+  if(!texto) return;
+  const sala = FORUM_SALAS.find(s=>s.id===salaAtual);
+  const agora = new Date();
+  sala.mensagens.push({autor: state.nome, hora: agora.getHours().toString().padStart(2,'0')+':'+agora.getMinutes().toString().padStart(2,'0'), texto});
+  input.value = '';
+  forumRenderMensagens();
+}
+function viewForum(){
+  if(!state.logado){
+    return `
+    <div class="forum-gate">
+      <div class="icon-lock"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 10V8a6 6 0 0112 0v2M5 10h14a1 1 0 011 1v9a1 1 0 01-1 1H5a1 1 0 01-1-1v-9a1 1 0 011-1z" stroke="currentColor" stroke-width="1.8"/></svg></div>
+      <h2>Fórum exclusivo para usuários cadastrados</h2>
+      <p>Crie uma conta gratuita para trocar dúvidas com outros profissionais de licitações e contratos públicos, por tema.</p>
+      <a class="btn btn-solid" onclick="fazerLogin()">Entrar / Cadastrar gratuitamente</a>
+    </div>`;
+  }
+  setTimeout(forumRenderMensagens, 0);
+  const sala = FORUM_SALAS.find(s=>s.id===salaAtual);
+  return `
+  <section class="section" style="padding-bottom:8px;">
+    <div class="section-head" style="border-bottom:none; margin-bottom:14px;">
+      <h2>Fórum de dúvidas</h2>
+    </div>
+    <div class="forum-layout">
+      <div class="forum-salas">
+        <div class="forum-salas-head">Salas por tema</div>
+        ${FORUM_SALAS.map(s=>`
+          <div class="sala-item ${s.id===salaAtual?'active':''}" onclick="forumTrocarSala('${s.id}')">
+            <div class="sala-icon">${s.sigla}</div>
+            <div style="flex:1;">
+              <strong>${s.nome}</strong>
+              <span>${s.online} online</span>
+            </div>
+            ${s.mensagens.length > 2 ? `<span class="sala-badge">${s.mensagens.length}</span>` : ''}
+          </div>`).join('')}
+      </div>
+      <div class="forum-chat">
+        <div class="forum-chat-head">
+          <h3>${sala.nome}</h3>
+          <span><span class="online-dot"></span>${sala.online} usuários online</span>
         </div>
-        <div>
-          <h1 class="text-xl font-bold text-slate-900 leading-none">BIBLIOTECA JURÍDICA</h1>
-          <p class="text-xs text-slate-500 font-medium tracking-wide">LICITAÇÕES & CONTRATOS</p>
+        <div class="forum-messages" id="forum-messages"></div>
+        <div class="forum-input">
+          <input id="forum-input-field" type="text" placeholder="Escreva sua dúvida ou resposta..." onkeydown="if(event.key==='Enter') forumEnviar()">
+          <button onclick="forumEnviar()"><svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         </div>
       </div>
-
-      <!-- NAV MENU -->
-      <nav class="flex items-center gap-6 text-sm font-semibold text-slate-700">
-        <a href="#" class="text-amber-600 border-b-2 border-amber-500 pb-1">Início</a>
-        <a href="#" class="hover:text-amber-600 transition">Jurisprudências</a>
-        <a href="#" class="hover:text-amber-600 transition">Doutrina & Artigos</a>
-        <a href="#" class="hover:text-amber-600 transition">Pareceres</a>
-        <a href="#" class="hover:text-amber-600 transition">Modelos de TR</a>
-      </nav>
-
-      <button class="bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition">
-        Área do Assinante
-      </button>
     </div>
-  </header>
+    <p class="forum-disclaimer">Ambiente de demonstração — mensagens não são salvas nem compartilhadas entre usuários reais. A versão em produção usará autenticação e conexão em tempo real.</p>
+  </section>
+  `;
+}
 
-  <!-- SEÇÃO HERO DE BUSCA -->
-  <section class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white py-12 px-6">
-    <div class="max-w-4xl mx-auto text-center">
-      <span class="bg-amber-500/20 text-amber-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-block mb-3 border border-amber-500/30">
-        Pesquisa Unificada
-      </span>
-      <h2 class="text-3xl md:text-4xl font-extrabold mb-4">
-        O que você precisa fundamentar hoje?
-      </h2>
-      <p class="text-slate-300 text-sm mb-8">
-        Consulte acórdãos do TCU, pareceres da AGU e teses aplicadas à Nova Lei de Licitações (Lei 14.133/21).
-      </p>
+/* ===================== CARROSSEL (hero) ===================== */
+const ARROW_LEFT = `<svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const ARROW_RIGHT = `<svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const PLAY_ICON = `<svg viewBox="0 0 24 24" fill="var(--ink)"><path d="M8 5v14l11-7z"/></svg>`;
 
-      <!-- BARRA DE BUSCA PRINCIPAL -->
-      <form onsubmit="event.preventDefault();" class="bg-white p-2 rounded-xl shadow-2xl flex flex-col md:flex-row gap-2">
-        <input 
-          type="text" 
-          placeholder="Ex: Pesquisa de preços, Dispensa, Carona em Ata, Termo de Referência..."
-          class="flex-1 px-4 py-3 text-slate-800 focus:outline-none text-sm"
-        />
-        <select class="px-3 py-3 text-sm text-slate-600 border-l border-slate-200 bg-slate-50 rounded-md focus:outline-none">
-          <option value="">Todas as fontes</option>
-          <option value="tcu">Acórdãos TCU</option>
-          <option value="tce">TCE-RJ e Estaduais</option>
-          <option value="agu">Pareceres AGU</option>
-        </select>
-        <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-8 py-3 rounded-lg text-sm transition">
-          Buscar
-        </button>
-      </form>
+const SVG_TRIBUNAL = `<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+  <rect x="20" y="120" width="160" height="8" fill="#E4C878"/>
+  <rect x="30" y="60" width="10" height="60" fill="#EDE3C6"/>
+  <rect x="58" y="60" width="10" height="60" fill="#EDE3C6"/>
+  <rect x="86" y="60" width="10" height="60" fill="#EDE3C6"/>
+  <rect x="114" y="60" width="10" height="60" fill="#EDE3C6"/>
+  <rect x="142" y="60" width="10" height="60" fill="#EDE3C6"/>
+  <rect x="160" y="60" width="10" height="60" fill="#EDE3C6"/>
+  <polygon points="15,60 185,60 100,20" fill="#E4C878"/>
+  <rect x="15" y="128" width="170" height="6" fill="#0F1A30"/>
+</svg>`;
+
+const SVG_DOCUMENTOS = `<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+  <rect x="55" y="80" width="90" height="60" rx="2" fill="#EDE3C6"/>
+  <rect x="45" y="66" width="90" height="60" rx="2" fill="#F4ECDA"/>
+  <rect x="35" y="52" width="90" height="60" rx="2" fill="#FFFFFF"/>
+  <line x1="47" y1="66" x2="113" y2="66" stroke="#C3C8B9" stroke-width="2"/>
+  <line x1="47" y1="76" x2="103" y2="76" stroke="#C3C8B9" stroke-width="2"/>
+  <line x1="47" y1="86" x2="113" y2="86" stroke="#C3C8B9" stroke-width="2"/>
+  <g transform="translate(126,88) rotate(-14)">
+    <circle cx="0" cy="0" r="20" fill="none" stroke="#E4C878" stroke-width="3"/>
+    <circle cx="0" cy="0" r="14" fill="none" stroke="#E4C878" stroke-width="1.5"/>
+  </g>
+</svg>`;
+
+const SVG_BALANCA = `<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+  <rect x="97" y="30" width="6" height="90" fill="#EDE3C6"/>
+  <rect x="70" y="118" width="60" height="8" fill="#EDE3C6"/>
+  <line x1="40" y1="50" x2="160" y2="50" stroke="#EDE3C6" stroke-width="4"/>
+  <line x1="40" y1="50" x2="40" y2="78" stroke="#EDE3C6" stroke-width="2"/>
+  <line x1="160" y1="50" x2="160" y2="78" stroke="#EDE3C6" stroke-width="2"/>
+  <path d="M22 78 A18 18 0 0 0 58 78 Z" fill="none" stroke="#E4C878" stroke-width="3"/>
+  <path d="M142 78 A18 18 0 0 0 178 78 Z" fill="none" stroke="#E4C878" stroke-width="3"/>
+  <circle cx="100" cy="32" r="6" fill="#E4C878"/>
+</svg>`;
+
+const SLIDES = [
+  {tipo:'image', eyebrow:'Atualização semanal', titulo:'Jurisprudência de TCU, TCEs e tribunais superiores em um só lugar', desc:'Novos acórdãos e decisões organizados por tema e por dispositivo legal, toda semana.', svg:SVG_TRIBUNAL, cta:['busca',{tipo:'jurisprudencia'}]},
+  {tipo:'image', eyebrow:'Pronto para usar', titulo:'Modelos de edital revisados e prontos para adaptar', desc:'Minutas completas de editais e termos de referência, com anexos técnicos inclusos.', svg:SVG_DOCUMENTOS, cta:['busca',{tipo:'modelo'}]},
+  {tipo:'video', eyebrow:'Conheça a plataforma', titulo:'Veja o LICITATECA em 90 segundos', desc:'Um tour rápido pela busca, pelos filtros e pela organização do acervo.', video:'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', cta:null},
+  {tipo:'image', eyebrow:'Fundamentação técnica', titulo:'Pareceres organizados por órgão e por tema', desc:'AGU, TCU e tribunais de contas estaduais, com indexação por legislação citada.', svg:SVG_BALANCA, cta:['busca',{tipo:'parecer'}]},
+];
+
+let carouselIndex = 0;
+let carouselTimer = null;
+
+function carouselSlideHTML(s, i){
+  const media = s.tipo === 'video'
+    ? `<video ${i===carouselIndex?'autoplay':''} muted loop playsinline preload="none" poster="" onclick="this.paused?this.play():this.pause()">
+         <source src="${s.video}" type="video/mp4">
+       </video>`
+    : s.svg;
+  return `<div class="slide ${i===carouselIndex?'active':''}" data-index="${i}">
+    <div class="slide-media">${media}</div>
+    <div class="slide-copy">
+      <span class="eyebrow">${s.eyebrow}</span>
+      <h3>${s.titulo}</h3>
+      <p>${s.desc}</p>
+      ${s.cta ? `<button class="btn btn-solid" style="background:#E4C878; color:var(--ink);" onclick="showView('${s.cta[0]}', ${JSON.stringify(s.cta[1])})">Explorar</button>` : ''}
+    </div>
+  </div>`;
+}
+
+function carouselInit(){
+  const track = document.getElementById('carousel-track');
+  const dots = document.getElementById('carousel-dots');
+  if(!track) return;
+  track.innerHTML = SLIDES.map(carouselSlideHTML).join('');
+  dots.innerHTML = SLIDES.map((_,i)=>`<button class="${i===carouselIndex?'active':''}" onclick="carouselGoTo(${i})" aria-label="Ir para slide ${i+1}"></button>`).join('');
+  carouselAutoplay();
+}
+function carouselRender(){
+  document.querySelectorAll('#carousel-track .slide').forEach((el,i)=>el.classList.toggle('active', i===carouselIndex));
+  document.querySelectorAll('#carousel-dots button').forEach((el,i)=>el.classList.toggle('active', i===carouselIndex));
+  const activeVideo = document.querySelector(`#carousel-track .slide[data-index="${carouselIndex}"] video`);
+  document.querySelectorAll('#carousel-track video').forEach(v=>v.pause());
+  if(activeVideo) activeVideo.play().catch(()=>{});
+}
+function carouselGoTo(i){ carouselIndex = i; carouselRender(); carouselAutoplay(); }
+function carouselGo(delta){ carouselIndex = (carouselIndex + delta + SLIDES.length) % SLIDES.length; carouselRender(); carouselAutoplay(); }
+function carouselAutoplay(){
+  clearInterval(carouselTimer);
+  carouselTimer = setInterval(()=>{ carouselIndex = (carouselIndex+1) % SLIDES.length; carouselRender(); }, 6000);
+}
+function carouselPause(){ clearInterval(carouselTimer); }
+function carouselResume(){ carouselAutoplay(); }
+
+/* ===================== HELPERS ===================== */
+function selo(doc){
+  return `<div class="selo">${doc.protocolo}<br>${doc.status === 'vigente' ? 'VIGENTE' : 'SUPERADO'}</div>`;
+}
+function statusTag(doc){
+  return doc.status === 'vigente'
+    ? `<span class="status-tag status-vigente">Vigente</span>`
+    : `<span class="status-tag status-cancelado">Entendimento superado</span>`;
+}
+function favBtn(doc){
+  const ativo = state.favoritos.has(doc.id);
+  return `<button class="fav-btn ${ativo?'active':''}" data-fav-id="${doc.id}" onclick="toggleFavorito(${doc.id}, event)" title="${ativo?'Remover dos favoritos':'Salvar nos favoritos'}" aria-label="Favoritar">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="${ativo?'#fff':'none'}" stroke="currentColor" stroke-width="2"><path d="M12 17.3l-6.16 3.6 1.64-6.99-5.48-4.6 7.19-.6L12 2l2.81 6.71 7.19.6-5.48 4.6 1.64 6.99z"/></svg>
+  </button>`;
+}
+function docCard(doc){
+  return `<div class="doc-card" onclick="showView('documento',{id:${doc.id}})">
+    <div class="doc-card-top">
+      <span class="doc-tipo">${TIPO_LABEL[doc.tipo]} · ${doc.orgao}</span>
+      ${selo(doc)}
+    </div>
+    <h3>${doc.titulo}</h3>
+    <p class="doc-ementa">${doc.ementa.slice(0,120)}…</p>
+    <div class="doc-meta">
+      <span style="display:flex; gap:8px; align-items:center;"><span>${doc.data}</span>${statusTag(doc)}</span>
+      ${favBtn(doc)}
+    </div>
+  </div>`;
+}
+function docRow(doc){
+  return `<div class="doc-row" onclick="showView('documento',{id:${doc.id}})">
+    ${selo(doc)}
+    <div class="doc-row-body">
+      <span class="doc-tipo">${TIPO_LABEL[doc.tipo]} · ${doc.orgao} · ${doc.data}</span>
+      <h3 style="margin-top:6px;">${doc.titulo}</h3>
+      <p class="doc-ementa">${doc.ementa}</p>
+      <div class="tag-row">${doc.categorias.map(c=>`<span class="tag">${c}</span>`).join('')}</div>
+    </div>
+    ${favBtn(doc)}
+  </div>`;
+}
+
+/* ===================== VIEWS ===================== */
+function viewHome(){
+  const destaques = DOCS.slice(0,6);
+  return `
+  <section class="hero">
+    <span class="hero-eyebrow">Biblioteca jurídica · Licitações e Contratos Públicos</span>
+    <h1>O que você precisa fundamentar hoje?</h1>
+    <p class="lede">Pesquise por tema, órgão ou dispositivo legal e encontre em segundos o fundamento que precisa para instruir seu processo.</p>
+    <div class="search-box">
+      <input id="hero-search" type="text" placeholder="Ex: dispensa de licitação por valor, pregão eletrônico, Lei 14.133..." onkeydown="if(event.key==='Enter') buscarDoHero()">
+      <button onclick="buscarDoHero()">Pesquisar</button>
+    </div>
+    <div class="chip-row">
+      <span class="chip" onclick="showView('busca',{tipo:'jurisprudencia'})">Jurisprudência</span>
+      <span class="chip" onclick="showView('busca',{tipo:'parecer'})">Pareceres</span>
+      <span class="chip" onclick="showView('busca',{tipo:'modelo'})">Modelos de Edital</span>
+      <span class="chip" onclick="showView('busca',{tipo:'artigo'})">Artigos</span>
     </div>
   </section>
 
-  <!-- CONTEÚDO PRINCIPAL (LAYOUT EM DUAS COLUNAS) -->
-  <main class="max-w-7xl mx-auto px-6 py-10 flex-1 grid grid-cols-1 lg:grid-cols-3 gap-8">
-    
-    <!-- COLUNA DA ESQUERDA (ARTIGOS E DESTAQUES) -->
-    <div class="lg:col-span-2 space-y-8">
-      
-      <!-- DESTAQUE PRINCIPAL -->
-      <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
-        <div class="p-6">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-0.5 rounded">JURISPRUDÊNCIA EM FOCO</span>
-            <span class="text-xs text-slate-400">• Lei 14.133/2021</span>
-          </div>
-          <h3 class="text-2xl font-bold text-slate-900 hover:text-amber-600 cursor-pointer transition">
-            TCU fixa novos entendimentos sobre os limites da Pesquisa de Preços em Contratações Diretas
-          </h3>
-          <p class="text-slate-600 text-sm mt-3 leading-relaxed">
-            Análise detalhada do acórdão recente que baliza a utilização de mídias especializadas e tabelas oficiais para instrução de processos de dispensa e inexigibilidade.
-          </p>
-          <div class="mt-6 flex items-center justify-between pt-4 border-t border-slate-100">
-            <span class="text-xs font-medium text-slate-500">Por: Consultoria Jurídica • Julho/2026</span>
-            <a href="#" class="text-amber-600 font-bold text-xs hover:underline flex items-center gap-1">
-              Ler análise completa &rarr;
-            </a>
-          </div>
-        </div>
-      </div>
+  <div class="carousel-wrap">
+    <div class="carousel" id="hero-carousel" role="region" aria-label="Destaques da plataforma" onmouseenter="carouselPause()" onmouseleave="carouselResume()">
+      <div class="carousel-track" id="carousel-track"></div>
+      <button class="carousel-arrow prev" onclick="carouselGo(-1)" aria-label="Slide anterior">${ARROW_LEFT}</button>
+      <button class="carousel-arrow next" onclick="carouselGo(1)" aria-label="Próximo slide">${ARROW_RIGHT}</button>
+      <div class="carousel-dots" id="carousel-dots"></div>
+    </div>
+  </div>
 
-      <!-- FEED DE ATUALIZAÇÕES -->
+  <section class="section">
+    <div class="section-head"><h2>Assuntos mais lidos</h2></div>
+    <div class="trending-grid">
+      ${MAIS_LIDOS.map((m,i)=>`
+        <button class="trending-item" onclick="showView('busca',{assunto:'${m.assunto}'})">
+          <span class="trending-rank">${i+1}</span>
+          <span class="trending-body">
+            <strong>${m.assunto}</strong>
+            <span>${m.leituras.toLocaleString('pt-BR')} leituras nos últimos 30 dias</span>
+          </span>
+        </button>`).join('')}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Recém-publicados</h2>
+      <a class="viewall" onclick="showView('busca',{})">Ver acervo completo →</a>
+    </div>
+    <div class="doc-grid">${destaques.map(docCard).join('')}</div>
+  </section>
+
+  <section class="section">
+    <div class="newsletter-box">
+      <div class="nl-copy">
+        <strong>Receba os principais acórdãos e pareceres da semana</strong>
+        <span>Um resumo por e-mail, sem spam — cancele quando quiser.</span>
+      </div>
+      <form class="newsletter-form" onsubmit="return inscreverNewsletter(event)">
+        <input type="email" placeholder="seu@email.com" required id="newsletter-email">
+        <button type="submit">Quero receber</button>
+      </form>
+    </div>
+  </section>
+  `;
+}
+
+function viewBusca(params){
+  if(params){
+    state.tipos = params.tipo ? new Set([params.tipo]) : state.tipos;
+    if(params.q !== undefined) state.q = params.q;
+    if(params.assunto !== undefined) state.assunto = params.assunto;
+    if(params.lei !== undefined) state.lei = params.lei;
+    if(params.estado !== undefined) state.estado = params.estado;
+    if(params.orgao !== undefined) state.orgao = params.orgao;
+  }
+  const orgaos = [...new Set(DOCS.map(d=>d.orgao))];
+  const estadosComDoc = [...new Set(DOCS.map(d=>d.estado).filter(Boolean))];
+
+  const render = () => {
+    let results = DOCS.filter(d=>{
+      const matchTipo = state.tipos.size === 0 || state.tipos.has(d.tipo);
+      const matchOrgao = state.orgao === 'todos' || d.orgao === state.orgao;
+      const matchEstado = state.estado === 'todos' || d.estado === state.estado;
+      const matchLei = state.lei === 'todos' || (d.leis && d.leis.includes(state.lei));
+      const matchAssunto = state.assunto === 'todos' || (d.assuntos && d.assuntos.includes(state.assunto));
+      const q = state.q.toLowerCase();
+      const matchQ = !q || d.titulo.toLowerCase().includes(q) || d.ementa.toLowerCase().includes(q) || d.categorias.some(c=>c.toLowerCase().includes(q));
+      return matchTipo && matchOrgao && matchEstado && matchLei && matchAssunto && matchQ;
+    });
+    document.getElementById('results-count').textContent = `${results.length} documento${results.length===1?'':'s'} encontrado${results.length===1?'':'s'}`;
+    document.getElementById('doc-list').innerHTML = results.length
+      ? results.map(docRow).join('')
+      : `<div class="empty-state">Nenhum documento encontrado para esses filtros.<br>Tente ajustar os termos ou remover algum filtro.</div>`;
+  };
+
+  setTimeout(()=>{
+    document.querySelectorAll('.facet-tipo').forEach(cb=>{
+      cb.checked = state.tipos.has(cb.value);
+      cb.onchange = ()=>{ cb.checked ? state.tipos.add(cb.value) : state.tipos.delete(cb.value); render(); };
+    });
+    document.getElementById('facet-orgao').value = state.orgao;
+    document.getElementById('facet-orgao').onchange = (e)=>{ state.orgao = e.target.value; render(); };
+    document.getElementById('facet-estado').value = state.estado;
+    document.getElementById('facet-estado').onchange = (e)=>{ state.estado = e.target.value; render(); };
+    document.getElementById('facet-lei').value = state.lei;
+    document.getElementById('facet-lei').onchange = (e)=>{ state.lei = e.target.value; render(); };
+    document.getElementById('facet-assunto').value = state.assunto;
+    document.getElementById('facet-assunto').onchange = (e)=>{ state.assunto = e.target.value; render(); };
+    document.getElementById('busca-input').value = state.q;
+    document.getElementById('busca-input').oninput = (e)=>{ state.q = e.target.value; render(); };
+    render();
+  },0);
+
+  const selectStyle = "width:100%; padding:8px; border:1px solid var(--line-strong); border-radius:2px; font-family:var(--font-body); font-size:13.5px;";
+  return `
+  <section class="section">
+    <div class="search-box" style="max-width:100%; margin-bottom:26px;">
+      <input id="busca-input" type="text" placeholder="Pesquisar no acervo...">
+      <button onclick="render_placeholder()">Pesquisar</button>
+    </div>
+    <div class="busca-layout">
+      <aside class="facets">
+        <div class="facet-group">
+          <h4>Tipo de documento</h4>
+          ${Object.entries(TIPO_LABEL).map(([val,label])=>`
+            <label class="facet-option"><input type="checkbox" class="facet-tipo" value="${val}"> ${label}</label>
+          `).join('')}
+        </div>
+        <div class="facet-group">
+          <h4>Assunto</h4>
+          <select id="facet-assunto" style="${selectStyle}">
+            <option value="todos">Todos os assuntos</option>
+            ${ASSUNTOS.map(a=>`<option value="${a}">${a}</option>`).join('')}
+          </select>
+        </div>
+        <div class="facet-group">
+          <h4>Lei</h4>
+          <select id="facet-lei" style="${selectStyle}">
+            <option value="todos">Todas as leis</option>
+            ${LEIS.map(l=>`<option value="${l.id}">${l.nome}</option>`).join('')}
+          </select>
+        </div>
+        <div class="facet-group">
+          <h4>Órgão / Fonte</h4>
+          <select id="facet-orgao" style="${selectStyle}">
+            <option value="todos">Todos os órgãos</option>
+            <optgroup label="Federais">
+              ${ORGAOS_FEDERAIS.map(o=>`<option value="${o.sigla}">${o.sigla} — ${o.nome}</option>`).join('')}
+            </optgroup>
+            <optgroup label="Tribunais de Contas Estaduais">
+              ${TCES.map(o=>`<option value="${o.sigla}">${o.sigla} — ${o.estado}</option>`).join('')}
+            </optgroup>
+            <optgroup label="Tribunais de Contas Municipais">
+              ${TCMS.map(o=>`<option value="${o.sigla}">${o.sigla} — ${o.estado}</option>`).join('')}
+            </optgroup>
+            <optgroup label="Outras fontes no acervo">
+              ${orgaos.filter(o=>!ORGAOS_FEDERAIS.some(f=>f.sigla===o) && !TCES.some(f=>f.sigla===o) && !TCMS.some(f=>f.sigla===o)).map(o=>`<option value="${o}">${o}</option>`).join('')}
+            </optgroup>
+          </select>
+        </div>
+        <div class="facet-group">
+          <h4>Estado</h4>
+          <select id="facet-estado" style="${selectStyle}">
+            <option value="todos">Todos os estados</option>
+            <option value="Federal">Federal</option>
+            ${ESTADOS.map(e=>`<option value="${e.nome}">${e.nome}</option>`).join('')}
+          </select>
+        </div>
+      </aside>
       <div>
-        <h4 class="text-lg font-bold text-slate-900 mb-4 pb-2 border-b-2 border-slate-900 flex justify-between items-center">
-          <span>Últimas Atualizações</span>
-          <span class="text-xs font-normal text-slate-500">Exibindo conteúdos mais recentes</span>
-        </h4>
-
-        <div class="space-y-4">
-          <!-- CARD 1 -->
-          <div class="bg-white p-5 rounded-xl border border-slate-200 flex flex-col md:flex-row gap-4 hover:border-slate-300 transition">
-            <div class="flex-1">
-              <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Parecer Orientativo</span>
-              <h5 class="font-bold text-slate-900 mt-1 hover:text-amber-600 cursor-pointer">
-                Reajuste e Reequilíbrio Econômico-Financeiro em Contratos Contínuos
-              </h5>
-              <p class="text-slate-600 text-xs mt-2 line-clamp-2">
-                Passo a passo para instrução processual dos pedidos de repactuação com dedicação exclusiva de mão de obra.
-              </p>
-              <div class="mt-3 text-xs text-slate-400">AGU • 15 de Julho, 2026</div>
-            </div>
-          </div>
-
-          <!-- CARD 2 -->
-          <div class="bg-white p-5 rounded-xl border border-slate-200 flex flex-col md:flex-row gap-4 hover:border-slate-300 transition">
-            <div class="flex-1">
-              <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Orientação Prática</span>
-              <h5 class="font-bold text-slate-900 mt-1 hover:text-amber-600 cursor-pointer">
-                Estudo Técnico Preliminar (ETP): Erros mais comuns apontados pelos TCEs
-              </h5>
-              <p class="text-slate-600 text-xs mt-2 line-clamp-2">
-                Checklist dos elementos essenciais e como evitar o fracionamento indevido de despesa no planejamento.
-              </p>
-              <div class="mt-3 text-xs text-slate-400">Tribunais de Contas • 10 de Julho, 2026</div>
-            </div>
-          </div>
-        </div>
+        <div class="results-count" id="results-count"></div>
+        <div class="doc-list" id="doc-list"></div>
       </div>
-
     </div>
+  </section>
+  `;
+}
 
-    <!-- COLUNA DA DIREITA (SIDEBAR) -->
-    <div class="space-y-6">
-      
-      <!-- LEGISLAÇÃO -->
-      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-        <h4 class="font-bold text-slate-900 text-sm mb-3 border-l-4 border-amber-500 pl-2">
-          Legislação de Referência
-        </h4>
-        <div class="space-y-2 text-xs font-medium">
-          <a href="#" class="block p-2.5 rounded bg-slate-50 hover:bg-amber-50 hover:text-amber-800 text-slate-700 transition flex justify-between">
-            <span>Lei nº 14.133/2021 (Nova Lei)</span>
-            <span class="font-bold">&rarr;</span>
-          </a>
-          <a href="#" class="block p-2.5 rounded bg-slate-50 hover:bg-amber-50 hover:text-amber-800 text-slate-700 transition flex justify-between">
-            <span>Lei nº 13.019/2014 (MROSC)</span>
-            <span class="font-bold">&rarr;</span>
-          </a>
-          <a href="#" class="block p-2.5 rounded bg-slate-50 hover:bg-amber-50 hover:text-amber-800 text-slate-700 transition flex justify-between">
-            <span>Lei Complementar nº 123/2006 (ME/EPP)</span>
-            <span class="font-bold">&rarr;</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- RADAR JURÍDICO -->
-      <div class="bg-slate-900 text-white p-5 rounded-xl shadow-sm">
-        <span class="text-amber-400 text-xs font-bold uppercase tracking-wider">Radar Jurídico</span>
-        <h4 class="font-bold text-base mt-1 mb-3">Informativos da Semana</h4>
-        <p class="text-xs text-slate-300 leading-relaxed mb-4">
-          Acompanhe os resumos dos informativos do TCU e dos Tribunais Estaduais para a sua comissão de contratação.
-        </p>
-        <button class="w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold text-xs py-2.5 rounded transition">
-          Inscrever-se para receber novidades
-        </button>
-      </div>
-
+function viewDocumento(params){
+  const doc = DOCS.find(d=>d.id === params.id) || DOCS[0];
+  return `
+  <div class="doc-detail">
+    <div class="breadcrumb">
+      <a onclick="showView('home')">Início</a> ›
+      <a onclick="showView('busca',{tipo:'${doc.tipo}'})">${TIPO_LABEL[doc.tipo]}</a> ›
+      <span>${doc.protocolo}</span>
     </div>
-
-  </main>
-
-  <!-- RODAPÉ -->
-  <footer class="bg-slate-900 text-slate-400 text-xs py-8 px-6 border-t border-slate-800 mt-auto">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="doc-detail-head">
       <div>
-        <p class="font-bold text-slate-200">Biblioteca Jurídica Especializada</p>
-        <p class="mt-1">Conteúdo direcionado para Gestores, Pregoeiros e Assessores Jurídicos.</p>
+        <span class="doc-tipo">${TIPO_LABEL[doc.tipo]} · ${doc.orgao} · ${doc.data}</span>
+        <h1>${doc.titulo}</h1>
+        <div class="doc-detail-meta">
+          <span><b>Status:</b> ${doc.status === 'vigente' ? 'Vigente' : 'Entendimento superado'}</span>
+          <span><b>Categorias:</b> ${doc.categorias.join(', ')}</span>
+        </div>
       </div>
-      <p>&copy; 2026 Biblioteca Jurídica. Todos os direitos reservados.</p>
+      <div style="display:flex; flex-direction:column; align-items:flex-end; gap:10px;">
+        ${selo(doc)}
+        ${favBtn(doc)}
+      </div>
     </div>
-  </footer>
 
+    <div class="ementa-block">${doc.ementa}</div>
+
+    <div class="doc-body">${doc.corpo.split('\n\n').map(p=>`<p>${p}</p>`).join('')}</div>
+
+    <div class="side-block">
+      <h4>Legislação relacionada</h4>
+      ${doc.legislacao.map(l=>`<span class="leg-chip">§ ${l}</span>`).join('')}
+    </div>
+
+    <div class="side-block">
+      <h4>Categorias</h4>
+      <div class="tag-row">${doc.categorias.map(c=>`<span class="tag" style="cursor:pointer;" onclick="showView('busca',{q:'${c}'})">${c}</span>`).join('')}</div>
+    </div>
+
+    <div class="premium-note">
+      <div>
+        <strong>Conteúdo gratuito durante a fase Beta</strong>
+        <p>Documentos como este continuarão acessíveis gratuitamente. Recursos como exportação em lote e alertas personalizados farão parte do plano Premium, em breve.</p>
+      </div>
+      <a class="btn btn-solid" style="background:#E4C878; color:var(--ink);" onclick="alert('Cadastro gratuito — a implementar na Fase 1.')">Criar conta gratuita</a>
+    </div>
+
+    <div class="expert-cta">
+      <span>Ficou com dúvida sobre a aplicação deste entendimento no seu caso? Fale com um especialista em licitações.</span>
+      <a href="https://wa.me/5541988623426" target="_blank" rel="noopener">Falar com especialista →</a>
+    </div>
+  </div>
+  `;
+}
+
+function inscreverNewsletter(ev){
+  ev.preventDefault();
+  const email = document.getElementById('newsletter-email').value;
+  alert(`Inscrição simulada para ${email}. Em produção, isso dispararia um e-mail de confirmação real.`);
+  ev.target.reset();
+  return false;
+}
+
+function viewFavoritos(){
+  const favs = DOCS.filter(d=>state.favoritos.has(d.id));
+  return `
+  <section class="section">
+    <div class="section-head"><h2>Meus favoritos</h2></div>
+    <div class="doc-list">
+      ${favs.length ? favs.map(docRow).join('') : `<div class="empty-state">Você ainda não salvou nenhum documento.<br>Clique na estrela de qualquer jurisprudência, parecer, modelo ou artigo para salvar aqui.</div>`}
+    </div>
+  </section>`;
+}
+
+/* ===================== PAINEL ADMINISTRATIVO ===================== */
+const STORAGE_KEY = 'licitateca-docs-custom';
+
+async function adminCarregarDocumentosSalvos(){
+  try{
+    if(!window.storage) return;
+    const res = await window.storage.get(STORAGE_KEY, false);
+    if(res && res.value){
+      const salvos = JSON.parse(res.value);
+      salvos.forEach(d=>{ if(!DOCS.some(existing=>existing.id===d.id)) DOCS.push(d); });
+    }
+  } catch(e){ /* nada salvo ainda, ou storage indisponível — segue com os dados de demonstração */ }
+}
+async function adminPersistir(){
+  try{
+    if(!window.storage) return;
+    const customs = DOCS.filter(d=>d.custom);
+    await window.storage.set(STORAGE_KEY, JSON.stringify(customs), false);
+  } catch(e){ console.warn('Não foi possível salvar de forma persistente neste ambiente.', e); }
+}
+function proximoId(){ return DOCS.length ? Math.max(...DOCS.map(d=>d.id)) + 1 : 1; }
+
+function adminSalvarDocumento(){
+  const $ = (sel) => document.querySelector(sel);
+  const getMulti = (sel) => [...$(sel).selectedOptions].map(o=>o.value);
+  const titulo = $('#admin-titulo').value.trim();
+  const ementa = $('#admin-ementa').value.trim();
+  const msgEl = document.getElementById('admin-msg');
+
+  if(!titulo || !ementa){
+    if(msgEl){ msgEl.style.display='block'; msgEl.style.background='var(--alert-bg)'; msgEl.style.color='var(--alert)'; msgEl.textContent = '⚠ Preencha ao menos Título e Ementa antes de publicar.'; }
+    return;
+  }
+
+  const assuntosSel = getMulti('#admin-assuntos');
+  const leisSel = getMulti('#admin-leis');
+  const dataInput = $('#admin-data').value;
+  const [ano,mes,dia] = dataInput ? dataInput.split('-') : ['','',''];
+
+  const novoDoc = {
+    id: proximoId(),
+    custom: true,
+    tipo: $('#admin-tipo').value,
+    orgao: $('#admin-orgao').value.trim() || 'Não informado',
+    protocolo: $('#admin-protocolo').value.trim() || '—',
+    status: $('#admin-status').value,
+    data: dataInput ? `${dia}/${mes}/${ano}` : '—',
+    titulo, ementa,
+    corpo: $('#admin-corpo').value.trim(),
+    categorias: assuntosSel.length ? assuntosSel : ['Sem assunto definido'],
+    assuntos: assuntosSel,
+    leis: leisSel,
+    estado: $('#admin-estado').value,
+  };
+
+  DOCS.push(novoDoc);
+  adminPersistir();
+  showView('admin');
+  setTimeout(()=>{
+    const m = document.getElementById('admin-msg');
+    if(m){ m.style.display='block'; m.style.background='var(--success-bg)'; m.style.color='var(--success)'; m.textContent = `✓ "${novoDoc.titulo}" foi publicado com sucesso.`; }
+  }, 0);
+}
+function adminExcluirDocumento(id){
+  if(!confirm('Remover este documento do acervo?')) return;
+  const idx = DOCS.findIndex(d=>d.id===id);
+  if(idx>-1) DOCS.splice(idx,1);
+  adminPersistir();
+  showView('admin');
+}
+
+function viewAdmin(){
+  return `
+  <section class="section">
+    <div class="section-head"><h2>Painel administrativo</h2></div>
+    <div class="admin-banner">⚠️ Ferramenta interna para quem alimenta o acervo. Documentos criados aqui ficam salvos no armazenamento deste protótipo (não são visíveis a outros usuários nem substituem um CMS de produção com controle de acesso por papel, fluxo de revisão e auditoria).</div>
+    <div class="admin-layout">
+      <div class="admin-form">
+        <h3>Novo documento</h3>
+        <div id="admin-msg" style="display:none; margin-bottom:14px; padding:10px 14px; border-radius:4px; font-size:13px; font-weight:600;"></div>
+        <div class="admin-row2">
+          <div class="admin-field">
+            <label>Tipo</label>
+            <select id="admin-tipo">
+              ${Object.entries(TIPO_LABEL).map(([v,l])=>`<option value="${v}">${l}</option>`).join('')}
+            </select>
+          </div>
+          <div class="admin-field">
+            <label>Status</label>
+            <select id="admin-status">
+              <option value="vigente">Vigente</option>
+              <option value="cancelado">Entendimento superado</option>
+            </select>
+          </div>
+        </div>
+        <div class="admin-field">
+          <label>Título</label>
+          <input type="text" id="admin-titulo" placeholder="Ex: TCU reafirma dever de pesquisa de preços...">
+        </div>
+        <div class="admin-row2">
+          <div class="admin-field">
+            <label>Órgão / Fonte</label>
+            <input type="text" id="admin-orgao" list="admin-orgaos-list" placeholder="Ex: TCU, STJ, TCE-SP...">
+            <datalist id="admin-orgaos-list">
+              ${[...ORGAOS_FEDERAIS.map(o=>o.sigla), ...TCES.map(o=>o.sigla), ...TCMS.map(o=>o.sigla), 'LICITATECA','Equipe Editorial'].map(s=>`<option value="${s}">`).join('')}
+            </datalist>
+          </div>
+          <div class="admin-field">
+            <label>Data</label>
+            <input type="date" id="admin-data">
+          </div>
+        </div>
+        <div class="admin-field">
+          <label>Protocolo / referência</label>
+          <input type="text" id="admin-protocolo" placeholder="Ex: Acórdão 1.234/2026 — Plenário">
+        </div>
+        <div class="admin-field">
+          <label>Estado</label>
+          <select id="admin-estado">
+            <option value="Federal">Federal</option>
+            ${ESTADOS.map(e=>`<option value="${e.nome}">${e.nome}</option>`).join('')}
+          </select>
+        </div>
+        <div class="admin-field">
+          <label>Lei(is) relacionada(s)</label>
+          <select id="admin-leis" multiple>
+            ${LEIS.map(l=>`<option value="${l.id}">${l.nome}</option>`).join('')}
+          </select>
+          <small>Ctrl/Cmd + clique para selecionar mais de uma.</small>
+        </div>
+        <div class="admin-field">
+          <label>Assunto(s)</label>
+          <select id="admin-assuntos" multiple>
+            ${ASSUNTOS.map(a=>`<option value="${a}">${a}</option>`).join('')}
+          </select>
+          <small>Usados também como categorias exibidas no documento.</small>
+        </div>
+        <div class="admin-field">
+          <label>Ementa (resumo curto)</label>
+          <textarea id="admin-ementa" rows="3"></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Corpo do texto</label>
+          <textarea id="admin-corpo" rows="6" placeholder="Separe parágrafos com uma linha em branco."></textarea>
+        </div>
+        <button type="button" onclick="adminSalvarDocumento()" class="btn btn-solid" style="width:100%;">Publicar documento</button>
+      </div>
+
+      <div>
+        <p style="font-size:13px; color:var(--secondary); margin:0 0 12px;">${DOCS.length} documentos no acervo (${DOCS.filter(d=>d.custom).length} criados por este painel).</p>
+        <table class="admin-table">
+          <thead><tr><th>Título</th><th>Tipo</th><th>Órgão</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            ${DOCS.slice().reverse().map(d=>`
+              <tr>
+                <td>${d.titulo}${d.custom?'<span class="admin-custom-badge">criado aqui</span>':''}</td>
+                <td>${TIPO_LABEL[d.tipo]}</td>
+                <td>${d.orgao}</td>
+                <td>${d.status==='vigente'?'Vigente':'Superado'}</td>
+                <td>${d.custom ? `<button class="admin-del" onclick="adminExcluirDocumento(${d.id})">Excluir</button>` : ''}</td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>`;
+}
+
+/* ===================== ROUTER ===================== */
+function showView(view, params){
+  const app = document.getElementById('app');
+  document.querySelectorAll('nav.main button').forEach(b=>b.classList.remove('active'));
+  if(view === 'home'){
+    app.innerHTML = viewHome();
+    document.querySelector('nav.main button[data-view="home"]').classList.add('active');
+    carouselInit();
+  } else if(view === 'busca'){
+    if(params && Object.keys(params).length === 0){
+      state.tipos = new Set(); state.q=''; state.assunto='todos'; state.lei='todos'; state.estado='todos'; state.orgao='todos';
+    }
+    app.innerHTML = viewBusca(params || {});
+    const leiBtn = document.querySelector(`nav.main button[data-lei="${state.lei}"]`);
+    if(leiBtn) leiBtn.classList.add('active');
+  } else if(view === 'documento'){
+    app.innerHTML = viewDocumento(params);
+  } else if(view === 'forum'){
+    app.innerHTML = viewForum();
+    document.querySelector('nav.main button[data-view="forum"]').classList.add('active');
+  } else if(view === 'favoritos'){
+    if(!state.logado){ fazerLogin(); }
+    app.innerHTML = viewFavoritos();
+  } else if(view === 'admin'){
+    app.innerHTML = viewAdmin();
+  }
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function buscarDoHero(){
+  const val = document.getElementById('hero-search').value;
+  state.tipos = new Set();
+  showView('busca', {q: val});
+}
+function render_placeholder(){} // botão de busca dentro da view já reage via oninput
+
+/* init */
+(async function init(){
+  await adminCarregarDocumentosSalvos();
+  renderHeaderActions();
+  showView('home');
+})();
+</script>
 </body>
 </html>
